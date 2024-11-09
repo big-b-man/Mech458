@@ -1,0 +1,1022 @@
+
+Lab 3.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000006  00800200  00000616  000006aa  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000616  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000004  00800206  00800206  000006b0  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000006b0  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000006e0  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 000000a8  00000000  00000000  00000720  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   0000137f  00000000  00000000  000007c8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00000e6b  00000000  00000000  00001b47  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00000716  00000000  00000000  000029b2  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  0000012c  00000000  00000000  000030c8  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00000623  00000000  00000000  000031f4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    0000036f  00000000  00000000  00003817  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000098  00000000  00000000  00003b86  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	71 c0       	rjmp	.+226    	; 0xe4 <__ctors_end>
+   2:	00 00       	nop
+   4:	8e c0       	rjmp	.+284    	; 0x122 <__bad_interrupt>
+   6:	00 00       	nop
+   8:	8c c0       	rjmp	.+280    	; 0x122 <__bad_interrupt>
+   a:	00 00       	nop
+   c:	8a c0       	rjmp	.+276    	; 0x122 <__bad_interrupt>
+   e:	00 00       	nop
+  10:	88 c0       	rjmp	.+272    	; 0x122 <__bad_interrupt>
+  12:	00 00       	nop
+  14:	86 c0       	rjmp	.+268    	; 0x122 <__bad_interrupt>
+  16:	00 00       	nop
+  18:	84 c0       	rjmp	.+264    	; 0x122 <__bad_interrupt>
+  1a:	00 00       	nop
+  1c:	82 c0       	rjmp	.+260    	; 0x122 <__bad_interrupt>
+  1e:	00 00       	nop
+  20:	80 c0       	rjmp	.+256    	; 0x122 <__bad_interrupt>
+  22:	00 00       	nop
+  24:	7e c0       	rjmp	.+252    	; 0x122 <__bad_interrupt>
+  26:	00 00       	nop
+  28:	7c c0       	rjmp	.+248    	; 0x122 <__bad_interrupt>
+  2a:	00 00       	nop
+  2c:	7a c0       	rjmp	.+244    	; 0x122 <__bad_interrupt>
+  2e:	00 00       	nop
+  30:	78 c0       	rjmp	.+240    	; 0x122 <__bad_interrupt>
+  32:	00 00       	nop
+  34:	76 c0       	rjmp	.+236    	; 0x122 <__bad_interrupt>
+  36:	00 00       	nop
+  38:	74 c0       	rjmp	.+232    	; 0x122 <__bad_interrupt>
+  3a:	00 00       	nop
+  3c:	72 c0       	rjmp	.+228    	; 0x122 <__bad_interrupt>
+  3e:	00 00       	nop
+  40:	70 c0       	rjmp	.+224    	; 0x122 <__bad_interrupt>
+  42:	00 00       	nop
+  44:	6e c0       	rjmp	.+220    	; 0x122 <__bad_interrupt>
+  46:	00 00       	nop
+  48:	6c c0       	rjmp	.+216    	; 0x122 <__bad_interrupt>
+  4a:	00 00       	nop
+  4c:	6a c0       	rjmp	.+212    	; 0x122 <__bad_interrupt>
+  4e:	00 00       	nop
+  50:	68 c0       	rjmp	.+208    	; 0x122 <__bad_interrupt>
+  52:	00 00       	nop
+  54:	66 c0       	rjmp	.+204    	; 0x122 <__bad_interrupt>
+  56:	00 00       	nop
+  58:	64 c0       	rjmp	.+200    	; 0x122 <__bad_interrupt>
+  5a:	00 00       	nop
+  5c:	62 c0       	rjmp	.+196    	; 0x122 <__bad_interrupt>
+  5e:	00 00       	nop
+  60:	60 c0       	rjmp	.+192    	; 0x122 <__bad_interrupt>
+  62:	00 00       	nop
+  64:	5e c0       	rjmp	.+188    	; 0x122 <__bad_interrupt>
+  66:	00 00       	nop
+  68:	5c c0       	rjmp	.+184    	; 0x122 <__bad_interrupt>
+  6a:	00 00       	nop
+  6c:	5a c0       	rjmp	.+180    	; 0x122 <__bad_interrupt>
+  6e:	00 00       	nop
+  70:	58 c0       	rjmp	.+176    	; 0x122 <__bad_interrupt>
+  72:	00 00       	nop
+  74:	56 c0       	rjmp	.+172    	; 0x122 <__bad_interrupt>
+  76:	00 00       	nop
+  78:	54 c0       	rjmp	.+168    	; 0x122 <__bad_interrupt>
+  7a:	00 00       	nop
+  7c:	52 c0       	rjmp	.+164    	; 0x122 <__bad_interrupt>
+  7e:	00 00       	nop
+  80:	50 c0       	rjmp	.+160    	; 0x122 <__bad_interrupt>
+  82:	00 00       	nop
+  84:	4e c0       	rjmp	.+156    	; 0x122 <__bad_interrupt>
+  86:	00 00       	nop
+  88:	4c c0       	rjmp	.+152    	; 0x122 <__bad_interrupt>
+  8a:	00 00       	nop
+  8c:	4a c0       	rjmp	.+148    	; 0x122 <__bad_interrupt>
+  8e:	00 00       	nop
+  90:	48 c0       	rjmp	.+144    	; 0x122 <__bad_interrupt>
+  92:	00 00       	nop
+  94:	46 c0       	rjmp	.+140    	; 0x122 <__bad_interrupt>
+  96:	00 00       	nop
+  98:	44 c0       	rjmp	.+136    	; 0x122 <__bad_interrupt>
+  9a:	00 00       	nop
+  9c:	42 c0       	rjmp	.+132    	; 0x122 <__bad_interrupt>
+  9e:	00 00       	nop
+  a0:	40 c0       	rjmp	.+128    	; 0x122 <__bad_interrupt>
+  a2:	00 00       	nop
+  a4:	3e c0       	rjmp	.+124    	; 0x122 <__bad_interrupt>
+  a6:	00 00       	nop
+  a8:	3c c0       	rjmp	.+120    	; 0x122 <__bad_interrupt>
+  aa:	00 00       	nop
+  ac:	3a c0       	rjmp	.+116    	; 0x122 <__bad_interrupt>
+  ae:	00 00       	nop
+  b0:	38 c0       	rjmp	.+112    	; 0x122 <__bad_interrupt>
+  b2:	00 00       	nop
+  b4:	36 c0       	rjmp	.+108    	; 0x122 <__bad_interrupt>
+  b6:	00 00       	nop
+  b8:	34 c0       	rjmp	.+104    	; 0x122 <__bad_interrupt>
+  ba:	00 00       	nop
+  bc:	32 c0       	rjmp	.+100    	; 0x122 <__bad_interrupt>
+  be:	00 00       	nop
+  c0:	30 c0       	rjmp	.+96     	; 0x122 <__bad_interrupt>
+  c2:	00 00       	nop
+  c4:	2e c0       	rjmp	.+92     	; 0x122 <__bad_interrupt>
+  c6:	00 00       	nop
+  c8:	2c c0       	rjmp	.+88     	; 0x122 <__bad_interrupt>
+  ca:	00 00       	nop
+  cc:	2a c0       	rjmp	.+84     	; 0x122 <__bad_interrupt>
+  ce:	00 00       	nop
+  d0:	28 c0       	rjmp	.+80     	; 0x122 <__bad_interrupt>
+  d2:	00 00       	nop
+  d4:	26 c0       	rjmp	.+76     	; 0x122 <__bad_interrupt>
+  d6:	00 00       	nop
+  d8:	24 c0       	rjmp	.+72     	; 0x122 <__bad_interrupt>
+  da:	00 00       	nop
+  dc:	22 c0       	rjmp	.+68     	; 0x122 <__bad_interrupt>
+  de:	00 00       	nop
+  e0:	20 c0       	rjmp	.+64     	; 0x122 <__bad_interrupt>
+	...
+
+000000e4 <__ctors_end>:
+  e4:	11 24       	eor	r1, r1
+  e6:	1f be       	out	0x3f, r1	; 63
+  e8:	cf ef       	ldi	r28, 0xFF	; 255
+  ea:	d1 e2       	ldi	r29, 0x21	; 33
+  ec:	de bf       	out	0x3e, r29	; 62
+  ee:	cd bf       	out	0x3d, r28	; 61
+  f0:	00 e0       	ldi	r16, 0x00	; 0
+  f2:	0c bf       	out	0x3c, r16	; 60
+
+000000f4 <__do_copy_data>:
+  f4:	12 e0       	ldi	r17, 0x02	; 2
+  f6:	a0 e0       	ldi	r26, 0x00	; 0
+  f8:	b2 e0       	ldi	r27, 0x02	; 2
+  fa:	e6 e1       	ldi	r30, 0x16	; 22
+  fc:	f6 e0       	ldi	r31, 0x06	; 6
+  fe:	00 e0       	ldi	r16, 0x00	; 0
+ 100:	0b bf       	out	0x3b, r16	; 59
+ 102:	02 c0       	rjmp	.+4      	; 0x108 <__do_copy_data+0x14>
+ 104:	07 90       	elpm	r0, Z+
+ 106:	0d 92       	st	X+, r0
+ 108:	a6 30       	cpi	r26, 0x06	; 6
+ 10a:	b1 07       	cpc	r27, r17
+ 10c:	d9 f7       	brne	.-10     	; 0x104 <__do_copy_data+0x10>
+
+0000010e <__do_clear_bss>:
+ 10e:	22 e0       	ldi	r18, 0x02	; 2
+ 110:	a6 e0       	ldi	r26, 0x06	; 6
+ 112:	b2 e0       	ldi	r27, 0x02	; 2
+ 114:	01 c0       	rjmp	.+2      	; 0x118 <.do_clear_bss_start>
+
+00000116 <.do_clear_bss_loop>:
+ 116:	1d 92       	st	X+, r1
+
+00000118 <.do_clear_bss_start>:
+ 118:	aa 30       	cpi	r26, 0x0A	; 10
+ 11a:	b2 07       	cpc	r27, r18
+ 11c:	e1 f7       	brne	.-8      	; 0x116 <.do_clear_bss_loop>
+ 11e:	a2 d0       	rcall	.+324    	; 0x264 <main>
+ 120:	78 c2       	rjmp	.+1264   	; 0x612 <_exit>
+
+00000122 <__bad_interrupt>:
+ 122:	6e cf       	rjmp	.-292    	; 0x0 <__vectors>
+
+00000124 <setup>:
+*/
+/* Check to see if the queue is empty */
+char isEmpty(link **h){
+	/* ENTER YOUR CODE HERE */
+	return(*h == NULL);
+}/*isEmpty*/
+ 124:	fc 01       	movw	r30, r24
+ 126:	11 82       	std	Z+1, r1	; 0x01
+ 128:	10 82       	st	Z, r1
+ 12a:	fb 01       	movw	r30, r22
+ 12c:	11 82       	std	Z+1, r1	; 0x01
+ 12e:	10 82       	st	Z, r1
+ 130:	08 95       	ret
+
+00000132 <initLink>:
+ 132:	cf 93       	push	r28
+ 134:	df 93       	push	r29
+ 136:	ec 01       	movw	r28, r24
+ 138:	83 e0       	ldi	r24, 0x03	; 3
+ 13a:	90 e0       	ldi	r25, 0x00	; 0
+ 13c:	49 d1       	rcall	.+658    	; 0x3d0 <malloc>
+ 13e:	99 83       	std	Y+1, r25	; 0x01
+ 140:	88 83       	st	Y, r24
+ 142:	fc 01       	movw	r30, r24
+ 144:	12 82       	std	Z+2, r1	; 0x02
+ 146:	11 82       	std	Z+1, r1	; 0x01
+ 148:	df 91       	pop	r29
+ 14a:	cf 91       	pop	r28
+ 14c:	08 95       	ret
+
+0000014e <enqueue>:
+ 14e:	db 01       	movw	r26, r22
+ 150:	ed 91       	ld	r30, X+
+ 152:	fc 91       	ld	r31, X
+ 154:	30 97       	sbiw	r30, 0x00	; 0
+ 156:	61 f0       	breq	.+24     	; 0x170 <enqueue+0x22>
+ 158:	da 01       	movw	r26, r20
+ 15a:	8d 91       	ld	r24, X+
+ 15c:	9c 91       	ld	r25, X
+ 15e:	11 97       	sbiw	r26, 0x01	; 1
+ 160:	92 83       	std	Z+2, r25	; 0x02
+ 162:	81 83       	std	Z+1, r24	; 0x01
+ 164:	8d 91       	ld	r24, X+
+ 166:	9c 91       	ld	r25, X
+ 168:	fb 01       	movw	r30, r22
+ 16a:	91 83       	std	Z+1, r25	; 0x01
+ 16c:	80 83       	st	Z, r24
+ 16e:	08 95       	ret
+ 170:	da 01       	movw	r26, r20
+ 172:	2d 91       	ld	r18, X+
+ 174:	3c 91       	ld	r19, X
+ 176:	11 97       	sbiw	r26, 0x01	; 1
+ 178:	fc 01       	movw	r30, r24
+ 17a:	31 83       	std	Z+1, r19	; 0x01
+ 17c:	20 83       	st	Z, r18
+ 17e:	8d 91       	ld	r24, X+
+ 180:	9c 91       	ld	r25, X
+ 182:	db 01       	movw	r26, r22
+ 184:	8d 93       	st	X+, r24
+ 186:	9c 93       	st	X, r25
+ 188:	08 95       	ret
+
+0000018a <dequeue>:
+ 18a:	fc 01       	movw	r30, r24
+ 18c:	80 81       	ld	r24, Z
+ 18e:	91 81       	ldd	r25, Z+1	; 0x01
+ 190:	db 01       	movw	r26, r22
+ 192:	8d 93       	st	X+, r24
+ 194:	9c 93       	st	X, r25
+ 196:	a0 81       	ld	r26, Z
+ 198:	b1 81       	ldd	r27, Z+1	; 0x01
+ 19a:	10 97       	sbiw	r26, 0x00	; 0
+ 19c:	31 f0       	breq	.+12     	; 0x1aa <dequeue+0x20>
+ 19e:	11 96       	adiw	r26, 0x01	; 1
+ 1a0:	8d 91       	ld	r24, X+
+ 1a2:	9c 91       	ld	r25, X
+ 1a4:	12 97       	sbiw	r26, 0x02	; 2
+ 1a6:	91 83       	std	Z+1, r25	; 0x01
+ 1a8:	80 83       	st	Z, r24
+ 1aa:	08 95       	ret
+
+000001ac <clearQueue>:
+ 1ac:	0f 93       	push	r16
+ 1ae:	1f 93       	push	r17
+ 1b0:	cf 93       	push	r28
+ 1b2:	df 93       	push	r29
+ 1b4:	ec 01       	movw	r28, r24
+ 1b6:	8b 01       	movw	r16, r22
+ 1b8:	88 81       	ld	r24, Y
+ 1ba:	99 81       	ldd	r25, Y+1	; 0x01
+ 1bc:	00 97       	sbiw	r24, 0x00	; 0
+ 1be:	51 f0       	breq	.+20     	; 0x1d4 <clearQueue+0x28>
+ 1c0:	fc 01       	movw	r30, r24
+ 1c2:	21 81       	ldd	r18, Z+1	; 0x01
+ 1c4:	32 81       	ldd	r19, Z+2	; 0x02
+ 1c6:	39 83       	std	Y+1, r19	; 0x01
+ 1c8:	28 83       	st	Y, r18
+ 1ca:	9a d1       	rcall	.+820    	; 0x500 <free>
+ 1cc:	88 81       	ld	r24, Y
+ 1ce:	99 81       	ldd	r25, Y+1	; 0x01
+ 1d0:	00 97       	sbiw	r24, 0x00	; 0
+ 1d2:	b1 f7       	brne	.-20     	; 0x1c0 <clearQueue+0x14>
+ 1d4:	f8 01       	movw	r30, r16
+ 1d6:	11 82       	std	Z+1, r1	; 0x01
+ 1d8:	10 82       	st	Z, r1
+ 1da:	df 91       	pop	r29
+ 1dc:	cf 91       	pop	r28
+ 1de:	1f 91       	pop	r17
+ 1e0:	0f 91       	pop	r16
+ 1e2:	08 95       	ret
+
+000001e4 <size>:
+	link 	*temp;			/* will store the link while traversing the queue */
+	int 	numElements;
+
+	numElements = 0;
+
+	temp = *h;			/* point to the first item in the list */
+ 1e4:	dc 01       	movw	r26, r24
+ 1e6:	ed 91       	ld	r30, X+
+ 1e8:	fc 91       	ld	r31, X
+
+	while(temp != NULL){
+ 1ea:	30 97       	sbiw	r30, 0x00	; 0
+ 1ec:	49 f0       	breq	.+18     	; 0x200 <size+0x1c>
+ 1ee:	80 e0       	ldi	r24, 0x00	; 0
+ 1f0:	90 e0       	ldi	r25, 0x00	; 0
+		numElements++;
+ 1f2:	01 96       	adiw	r24, 0x01	; 1
+		temp = temp->next;
+ 1f4:	01 80       	ldd	r0, Z+1	; 0x01
+ 1f6:	f2 81       	ldd	r31, Z+2	; 0x02
+ 1f8:	e0 2d       	mov	r30, r0
+
+	numElements = 0;
+
+	temp = *h;			/* point to the first item in the list */
+
+	while(temp != NULL){
+ 1fa:	30 97       	sbiw	r30, 0x00	; 0
+ 1fc:	d1 f7       	brne	.-12     	; 0x1f2 <size+0xe>
+ 1fe:	08 95       	ret
+int size(link **h, link **t){
+
+	link 	*temp;			/* will store the link while traversing the queue */
+	int 	numElements;
+
+	numElements = 0;
+ 200:	80 e0       	ldi	r24, 0x00	; 0
+ 202:	90 e0       	ldi	r25, 0x00	; 0
+		numElements++;
+		temp = temp->next;
+	}/*while*/
+	
+	return(numElements);
+ 204:	08 95       	ret
+
+00000206 <timer8MHz>:
+
+//This file contains the timer subroutines from lab 2. They have been repurposed for use in future labs
+
+void timer8MHz(){ //sets the timer to 8MHz
+
+    CLKPR = 0x80; /* This will be discussed later. */
+ 206:	e1 e6       	ldi	r30, 0x61	; 97
+ 208:	f0 e0       	ldi	r31, 0x00	; 0
+ 20a:	80 e8       	ldi	r24, 0x80	; 128
+ 20c:	80 83       	st	Z, r24
+    CLKPR = 0x01; /* Required to set CPU Clock to 8MHz */
+ 20e:	81 e0       	ldi	r24, 0x01	; 1
+ 210:	80 83       	st	Z, r24
+    
+    /* Timer instructions */
+    /* Sets timer 1 to run at 1MHz, note: CPU clock is set to 8MHz.
+       Disable all functions and use as pure timer */
+    
+    TCCR1B = _BV(CS11); /* _BV sets the bit to logic 1 */
+ 212:	82 e0       	ldi	r24, 0x02	; 2
+ 214:	80 93 81 00 	sts	0x0081, r24	; 0x800081 <__TEXT_REGION_LENGTH__+0x7c0081>
+ 218:	08 95       	ret
+
+0000021a <mTimer>:
+    /* CS means clock select, has the pre-scaler set to 8 */
+
+} /* close timer8MHz */
+
+/* This is the driver for the timer. */
+void mTimer(int count){
+ 21a:	ac 01       	movw	r20, r24
+    int i; /* keeps track of loop number */
+
+    i = 0; /* initializes loop counter */
+
+    /* Set the Waveform Generation mode bit description to Clear Timer on Compare Match mode (CTC) only */
+    TCCR1B |= _BV(WGM12); /* set WGM bits to 0100, see page 145 */
+ 21c:	e1 e8       	ldi	r30, 0x81	; 129
+ 21e:	f0 e0       	ldi	r31, 0x00	; 0
+ 220:	90 81       	ld	r25, Z
+ 222:	98 60       	ori	r25, 0x08	; 8
+ 224:	90 83       	st	Z, r25
+    /* Note WGM is spread over two registers. */
+
+    OCR1A = 0x03E8; /* Set Output Compare Register for 1000 cycles = 1ms */
+ 226:	88 ee       	ldi	r24, 0xE8	; 232
+ 228:	93 e0       	ldi	r25, 0x03	; 3
+ 22a:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__TEXT_REGION_LENGTH__+0x7c0089>
+ 22e:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__TEXT_REGION_LENGTH__+0x7c0088>
+    TCNT1 = 0x0000; /* Sets initial value of Timer Counter to 0x0000 */
+ 232:	10 92 85 00 	sts	0x0085, r1	; 0x800085 <__TEXT_REGION_LENGTH__+0x7c0085>
+ 236:	10 92 84 00 	sts	0x0084, r1	; 0x800084 <__TEXT_REGION_LENGTH__+0x7c0084>
+    TIMSK1 = TIMSK1 | 0b00000010; /* Enable the output compare interrupt enable */
+ 23a:	ef e6       	ldi	r30, 0x6F	; 111
+ 23c:	f0 e0       	ldi	r31, 0x00	; 0
+ 23e:	90 81       	ld	r25, Z
+ 240:	92 60       	ori	r25, 0x02	; 2
+ 242:	90 83       	st	Z, r25
+
+    TIFR1 |= _BV(OCF1A); /* clear the timer interrupt flag and begin new timing */
+ 244:	b1 9a       	sbi	0x16, 1	; 22
+    The system clock has been pre-scaled by 2. This means it's running at half speed, 8MHz. See Technical manual for
+    ATmega2560 (i.e. full manual) and look up "16-bit Timer/Counter1." */
+
+    int i; /* keeps track of loop number */
+
+    i = 0; /* initializes loop counter */
+ 246:	20 e0       	ldi	r18, 0x00	; 0
+ 248:	30 e0       	ldi	r19, 0x00	; 0
+
+    TIFR1 |= _BV(OCF1A); /* clear the timer interrupt flag and begin new timing */
+    /* If the following statement is confusing, please ask for clarification! */
+
+    /* Poll the timer to determine when the timer has reached 0x03E8 */
+    while(i<count){
+ 24a:	05 c0       	rjmp	.+10     	; 0x256 <mTimer+0x3c>
+        if((TIFR1 & 0x02) == 0x02){
+ 24c:	b1 9b       	sbis	0x16, 1	; 22
+ 24e:	fe cf       	rjmp	.-4      	; 0x24c <mTimer+0x32>
+            TIFR1 |= _BV(OCF1A); /* clear interrupt flag by writing a ONE to the bit */
+ 250:	b1 9a       	sbi	0x16, 1	; 22
+            i++; /* increment loop number */
+ 252:	2f 5f       	subi	r18, 0xFF	; 255
+ 254:	3f 4f       	sbci	r19, 0xFF	; 255
+
+    TIFR1 |= _BV(OCF1A); /* clear the timer interrupt flag and begin new timing */
+    /* If the following statement is confusing, please ask for clarification! */
+
+    /* Poll the timer to determine when the timer has reached 0x03E8 */
+    while(i<count){
+ 256:	24 17       	cp	r18, r20
+ 258:	35 07       	cpc	r19, r21
+ 25a:	1c f4       	brge	.+6      	; 0x262 <mTimer+0x48>
+        if((TIFR1 & 0x02) == 0x02){
+ 25c:	b1 9b       	sbis	0x16, 1	; 22
+ 25e:	f6 cf       	rjmp	.-20     	; 0x24c <mTimer+0x32>
+ 260:	f7 cf       	rjmp	.-18     	; 0x250 <mTimer+0x36>
+ 262:	08 95       	ret
+
+00000264 <main>:
+#include "LinkedQueue.h"
+#include "Timer.h"
+
+int debug(char input); //drives the debug LED's on PORTC
+
+int main(int argc, char *argv[]){
+ 264:	cf 93       	push	r28
+ 266:	df 93       	push	r29
+ 268:	cd b7       	in	r28, 0x3d	; 61
+ 26a:	de b7       	in	r29, 0x3e	; 62
+ 26c:	28 97       	sbiw	r28, 0x08	; 8
+ 26e:	0f b6       	in	r0, 0x3f	; 63
+ 270:	f8 94       	cli
+ 272:	de bf       	out	0x3e, r29	; 62
+ 274:	0f be       	out	0x3f, r0	; 63
+ 276:	cd bf       	out	0x3d, r28	; 61
+	char readInput;
+	
+	timer8MHz();//sets the clock speed to 8MHz
+ 278:	c6 df       	rcall	.-116    	; 0x206 <timer8MHz>
+	
+	DDRA = 0x00; //Sets Port A register pins to input for button states
+ 27a:	11 b8       	out	0x01, r1	; 1
+	DDRC = 0xFF; //Sets Port C register pins to output so we can control LEDs
+ 27c:	8f ef       	ldi	r24, 0xFF	; 255
+ 27e:	87 b9       	out	0x07, r24	; 7
+	DDRL = 0xFF; //Sets Port L register pins to output so we can control LEDs
+ 280:	80 93 0a 01 	sts	0x010A, r24	; 0x80010a <__TEXT_REGION_LENGTH__+0x7c010a>
+	link *head;			/* The ptr to the head of the queue */
+	link *tail;			/* The ptr to the tail of the queue */
+	link *newLink;		/* A ptr to a link aggregate data type (struct) */
+	link *rtnLink;		/* same as the above */
+
+	rtnLink = NULL;
+ 284:	18 86       	std	Y+8, r1	; 0x08
+ 286:	1f 82       	std	Y+7, r1	; 0x07
+	newLink = NULL;
+ 288:	1e 82       	std	Y+6, r1	; 0x06
+ 28a:	1d 82       	std	Y+5, r1	; 0x05
+				mTimer(30);//waits 30ms for contact bounce
+				while ((PINA & 0x04) == 0x00){//waits for button to be released
+				}
+				mTimer(30);//waits 30 ms for contact bounce
+			} else {//
+				PORTL = 0x80; //debug pin set. Refer to debug subroutine for codes
+ 28c:	0f 2e       	mov	r0, r31
+ 28e:	fb e0       	ldi	r31, 0x0B	; 11
+ 290:	ef 2e       	mov	r14, r31
+ 292:	ff 24       	eor	r15, r15
+ 294:	f3 94       	inc	r15
+ 296:	f0 2d       	mov	r31, r0
+ 298:	00 e8       	ldi	r16, 0x80	; 128
+	switch (input){
+		case (0x00):
+			PORTL = 0b00000000;//data 01 writen, display 00 on green LEDS
+			break;
+		case (0x01):
+			PORTL = 0b00100000;//data 01 writen, display 01 on green LEDS
+ 29a:	68 94       	set
+ 29c:	bb 24       	eor	r11, r11
+ 29e:	b5 f8       	bld	r11, 5
+			break;
+		case (0x02):
+			PORTL = 0b01000000;//data 10 writen, display 10 on green LEDS
+ 2a0:	68 94       	set
+ 2a2:	cc 24       	eor	r12, r12
+ 2a4:	c6 f8       	bld	r12, 6
+	rtnLink = NULL;
+	newLink = NULL;
+
+	//main program loop
+	while(1){
+		setup(&head,&tail);//sets up linked list
+ 2a6:	be 01       	movw	r22, r28
+ 2a8:	6d 5f       	subi	r22, 0xFD	; 253
+ 2aa:	7f 4f       	sbci	r23, 0xFF	; 255
+ 2ac:	ce 01       	movw	r24, r28
+ 2ae:	01 96       	adiw	r24, 0x01	; 1
+ 2b0:	39 df       	rcall	.-398    	; 0x124 <setup>
+			break;
+		case (0x02):
+			PORTL = 0b01000000;//data 10 writen, display 10 on green LEDS
+			break;
+		case (0x03):
+			PORTL = 0b01100000;//data 11 writen, display 11 on green LEDS
+ 2b2:	0f 2e       	mov	r0, r31
+ 2b4:	f0 e6       	ldi	r31, 0x60	; 96
+ 2b6:	df 2e       	mov	r13, r31
+ 2b8:	f0 2d       	mov	r31, r0
+	newLink = NULL;
+
+	//main program loop
+	while(1){
+		setup(&head,&tail);//sets up linked list
+		while(size(&head,&tail) < 0x04){ //executes while loop if there are less than 4 items in the linked list, otherwise skips to element dequeing.
+ 2ba:	36 c0       	rjmp	.+108    	; 0x328 <main+0xc4>
+			if((PINA & 0x04) == 0x00){//checks if push button is being pushed
+ 2bc:	02 99       	sbic	0x00, 2	; 0
+ 2be:	32 c0       	rjmp	.+100    	; 0x324 <main+0xc0>
+				PORTL = 0x00;
+ 2c0:	f7 01       	movw	r30, r14
+ 2c2:	10 82       	st	Z, r1
+				readInput = PINA & 0x03; //reads input. Since we know PA2 is low we can mask to only read the least 2 bits
+ 2c4:	10 b1       	in	r17, 0x00	; 0
+ 2c6:	13 70       	andi	r17, 0x03	; 3
+	return 0;
+}
+
+//reads input and sets Debug LEDS. IDK how Atmel compiles function calls so I made this inline so that it's inserted into the code for more speed
+inline int debug(char input){
+	switch (input){
+ 2c8:	11 30       	cpi	r17, 0x01	; 1
+ 2ca:	49 f0       	breq	.+18     	; 0x2de <main+0x7a>
+ 2cc:	28 f0       	brcs	.+10     	; 0x2d8 <main+0x74>
+ 2ce:	12 30       	cpi	r17, 0x02	; 2
+ 2d0:	49 f0       	breq	.+18     	; 0x2e4 <main+0x80>
+ 2d2:	13 30       	cpi	r17, 0x03	; 3
+ 2d4:	51 f0       	breq	.+20     	; 0x2ea <main+0x86>
+ 2d6:	0c c0       	rjmp	.+24     	; 0x2f0 <main+0x8c>
+		case (0x00):
+			PORTL = 0b00000000;//data 01 writen, display 00 on green LEDS
+ 2d8:	f7 01       	movw	r30, r14
+ 2da:	10 82       	st	Z, r1
+ 2dc:	0b c0       	rjmp	.+22     	; 0x2f4 <main+0x90>
+			break;
+		case (0x01):
+			PORTL = 0b00100000;//data 01 writen, display 01 on green LEDS
+ 2de:	f7 01       	movw	r30, r14
+ 2e0:	b0 82       	st	Z, r11
+ 2e2:	08 c0       	rjmp	.+16     	; 0x2f4 <main+0x90>
+			break;
+		case (0x02):
+			PORTL = 0b01000000;//data 10 writen, display 10 on green LEDS
+ 2e4:	f7 01       	movw	r30, r14
+ 2e6:	c0 82       	st	Z, r12
+ 2e8:	05 c0       	rjmp	.+10     	; 0x2f4 <main+0x90>
+			break;
+		case (0x03):
+			PORTL = 0b01100000;//data 11 writen, display 11 on green LEDS
+ 2ea:	f7 01       	movw	r30, r14
+ 2ec:	d0 82       	st	Z, r13
+ 2ee:	02 c0       	rjmp	.+4      	; 0x2f4 <main+0x90>
+			break;
+		default:
+			PORTL = 0b00000000;//default case
+ 2f0:	f7 01       	movw	r30, r14
+ 2f2:	10 82       	st	Z, r1
+		while(size(&head,&tail) < 0x04){ //executes while loop if there are less than 4 items in the linked list, otherwise skips to element dequeing.
+			if((PINA & 0x04) == 0x00){//checks if push button is being pushed
+				PORTL = 0x00;
+				readInput = PINA & 0x03; //reads input. Since we know PA2 is low we can mask to only read the least 2 bits
+				debug(readInput); //debug pin set. Refer to debug subroutine for codes
+				initLink(&newLink); //creates new link and stores input to linked lsit.
+ 2f4:	ce 01       	movw	r24, r28
+ 2f6:	05 96       	adiw	r24, 0x05	; 5
+ 2f8:	1c df       	rcall	.-456    	; 0x132 <initLink>
+				newLink->e.number = readInput;
+ 2fa:	ed 81       	ldd	r30, Y+5	; 0x05
+ 2fc:	fe 81       	ldd	r31, Y+6	; 0x06
+ 2fe:	10 83       	st	Z, r17
+				enqueue(&head, &tail, &newLink);
+ 300:	ae 01       	movw	r20, r28
+ 302:	4b 5f       	subi	r20, 0xFB	; 251
+ 304:	5f 4f       	sbci	r21, 0xFF	; 255
+ 306:	be 01       	movw	r22, r28
+ 308:	6d 5f       	subi	r22, 0xFD	; 253
+ 30a:	7f 4f       	sbci	r23, 0xFF	; 255
+ 30c:	ce 01       	movw	r24, r28
+ 30e:	01 96       	adiw	r24, 0x01	; 1
+				mTimer(30);//waits 30ms for contact bounce
+ 310:	1e df       	rcall	.-452    	; 0x14e <enqueue>
+ 312:	8e e1       	ldi	r24, 0x1E	; 30
+ 314:	90 e0       	ldi	r25, 0x00	; 0
+				while ((PINA & 0x04) == 0x00){//waits for button to be released
+ 316:	81 df       	rcall	.-254    	; 0x21a <mTimer>
+ 318:	02 9b       	sbis	0x00, 2	; 0
+				}
+				mTimer(30);//waits 30 ms for contact bounce
+ 31a:	fe cf       	rjmp	.-4      	; 0x318 <main+0xb4>
+ 31c:	8e e1       	ldi	r24, 0x1E	; 30
+ 31e:	90 e0       	ldi	r25, 0x00	; 0
+ 320:	7c df       	rcall	.-264    	; 0x21a <mTimer>
+ 322:	02 c0       	rjmp	.+4      	; 0x328 <main+0xc4>
+			} else {//
+				PORTL = 0x80; //debug pin set. Refer to debug subroutine for codes
+ 324:	f7 01       	movw	r30, r14
+	newLink = NULL;
+
+	//main program loop
+	while(1){
+		setup(&head,&tail);//sets up linked list
+		while(size(&head,&tail) < 0x04){ //executes while loop if there are less than 4 items in the linked list, otherwise skips to element dequeing.
+ 326:	00 83       	st	Z, r16
+ 328:	be 01       	movw	r22, r28
+ 32a:	6d 5f       	subi	r22, 0xFD	; 253
+ 32c:	7f 4f       	sbci	r23, 0xFF	; 255
+ 32e:	ce 01       	movw	r24, r28
+ 330:	01 96       	adiw	r24, 0x01	; 1
+ 332:	58 df       	rcall	.-336    	; 0x1e4 <size>
+ 334:	04 97       	sbiw	r24, 0x04	; 4
+ 336:	0c f4       	brge	.+2      	; 0x33a <main+0xd6>
+ 338:	c1 cf       	rjmp	.-126    	; 0x2bc <main+0x58>
+				mTimer(30);//waits 30 ms for contact bounce
+			} else {//
+				PORTL = 0x80; //debug pin set. Refer to debug subroutine for codes
+			}
+		}
+		PORTL = 0b00010000;//debug code. 0b00010000 displays last yellow LED, which is always iluminated when displaying data to red LEDs
+ 33a:	80 e1       	ldi	r24, 0x10	; 16
+ 33c:	f7 01       	movw	r30, r14
+		dequeue(&head,&rtnLink);//dequeues first item since it isn't used
+ 33e:	80 83       	st	Z, r24
+ 340:	be 01       	movw	r22, r28
+ 342:	69 5f       	subi	r22, 0xF9	; 249
+ 344:	7f 4f       	sbci	r23, 0xFF	; 255
+ 346:	ce 01       	movw	r24, r28
+ 348:	01 96       	adiw	r24, 0x01	; 1
+		dequeue(&head,&rtnLink);//dequeues second item
+ 34a:	1f df       	rcall	.-450    	; 0x18a <dequeue>
+ 34c:	be 01       	movw	r22, r28
+ 34e:	69 5f       	subi	r22, 0xF9	; 249
+ 350:	7f 4f       	sbci	r23, 0xFF	; 255
+ 352:	ce 01       	movw	r24, r28
+ 354:	01 96       	adiw	r24, 0x01	; 1
+		PORTC = rtnLink->e.number;//sets lowest 2 bits of PORTC to value of dequed item
+ 356:	19 df       	rcall	.-462    	; 0x18a <dequeue>
+ 358:	ef 81       	ldd	r30, Y+7	; 0x07
+ 35a:	f8 85       	ldd	r31, Y+8	; 0x08
+		free(rtnLink);
+ 35c:	80 81       	ld	r24, Z
+ 35e:	88 b9       	out	0x08, r24	; 8
+ 360:	8f 81       	ldd	r24, Y+7	; 0x07
+		mTimer(1000);
+ 362:	98 85       	ldd	r25, Y+8	; 0x08
+ 364:	cd d0       	rcall	.+410    	; 0x500 <free>
+ 366:	88 ee       	ldi	r24, 0xE8	; 232
+ 368:	93 e0       	ldi	r25, 0x03	; 3
+		dequeue(&head,&rtnLink);//deque next item
+ 36a:	57 df       	rcall	.-338    	; 0x21a <mTimer>
+ 36c:	be 01       	movw	r22, r28
+ 36e:	69 5f       	subi	r22, 0xF9	; 249
+ 370:	7f 4f       	sbci	r23, 0xFF	; 255
+ 372:	ce 01       	movw	r24, r28
+ 374:	01 96       	adiw	r24, 0x01	; 1
+		PORTC = PORTC + (rtnLink->e.number<<2);//display new item to LEDS
+ 376:	09 df       	rcall	.-494    	; 0x18a <dequeue>
+ 378:	98 b1       	in	r25, 0x08	; 8
+ 37a:	ef 81       	ldd	r30, Y+7	; 0x07
+ 37c:	f8 85       	ldd	r31, Y+8	; 0x08
+ 37e:	80 81       	ld	r24, Z
+ 380:	88 0f       	add	r24, r24
+ 382:	88 0f       	add	r24, r24
+		mTimer(1000);
+ 384:	89 0f       	add	r24, r25
+ 386:	88 b9       	out	0x08, r24	; 8
+ 388:	88 ee       	ldi	r24, 0xE8	; 232
+ 38a:	93 e0       	ldi	r25, 0x03	; 3
+		dequeue(&head,&rtnLink);//deque next item
+ 38c:	46 df       	rcall	.-372    	; 0x21a <mTimer>
+ 38e:	be 01       	movw	r22, r28
+ 390:	69 5f       	subi	r22, 0xF9	; 249
+ 392:	7f 4f       	sbci	r23, 0xFF	; 255
+ 394:	ce 01       	movw	r24, r28
+ 396:	01 96       	adiw	r24, 0x01	; 1
+ 398:	f8 de       	rcall	.-528    	; 0x18a <dequeue>
+		PORTC = PORTC + (rtnLink->e.number<<4);//display new item to LEDS
+ 39a:	88 b1       	in	r24, 0x08	; 8
+ 39c:	ef 81       	ldd	r30, Y+7	; 0x07
+ 39e:	f8 85       	ldd	r31, Y+8	; 0x08
+ 3a0:	90 81       	ld	r25, Z
+ 3a2:	f0 e1       	ldi	r31, 0x10	; 16
+ 3a4:	9f 9f       	mul	r25, r31
+ 3a6:	80 0d       	add	r24, r0
+		clearQueue(&head,&tail);//destroys queue since it's reinitialized at the start of the program loop
+ 3a8:	11 24       	eor	r1, r1
+ 3aa:	88 b9       	out	0x08, r24	; 8
+ 3ac:	be 01       	movw	r22, r28
+ 3ae:	6d 5f       	subi	r22, 0xFD	; 253
+ 3b0:	7f 4f       	sbci	r23, 0xFF	; 255
+ 3b2:	ce 01       	movw	r24, r28
+		
+		while((PINA & 0x04) != 0x00){//checks for push button input to restart program
+ 3b4:	01 96       	adiw	r24, 0x01	; 1
+ 3b6:	fa de       	rcall	.-524    	; 0x1ac <clearQueue>
+		}
+		mTimer(30);
+ 3b8:	02 99       	sbic	0x00, 2	; 0
+ 3ba:	fe cf       	rjmp	.-4      	; 0x3b8 <main+0x154>
+ 3bc:	8e e1       	ldi	r24, 0x1E	; 30
+ 3be:	90 e0       	ldi	r25, 0x00	; 0
+		
+		PORTC = 0x00;//resets debug code
+ 3c0:	2c df       	rcall	.-424    	; 0x21a <mTimer>
+		while((PINA & 0x04) == 0x00){
+ 3c2:	18 b8       	out	0x08, r1	; 8
+ 3c4:	02 9b       	sbis	0x00, 2	; 0
+		}
+		mTimer(30);
+ 3c6:	fe cf       	rjmp	.-4      	; 0x3c4 <main+0x160>
+ 3c8:	8e e1       	ldi	r24, 0x1E	; 30
+ 3ca:	90 e0       	ldi	r25, 0x00	; 0
+ 3cc:	26 df       	rcall	.-436    	; 0x21a <mTimer>
+	}
+ 3ce:	6b cf       	rjmp	.-298    	; 0x2a6 <main+0x42>
+
+000003d0 <malloc>:
+ 3d0:	0f 93       	push	r16
+ 3d2:	1f 93       	push	r17
+ 3d4:	cf 93       	push	r28
+ 3d6:	df 93       	push	r29
+ 3d8:	82 30       	cpi	r24, 0x02	; 2
+ 3da:	91 05       	cpc	r25, r1
+ 3dc:	10 f4       	brcc	.+4      	; 0x3e2 <malloc+0x12>
+ 3de:	82 e0       	ldi	r24, 0x02	; 2
+ 3e0:	90 e0       	ldi	r25, 0x00	; 0
+ 3e2:	e0 91 08 02 	lds	r30, 0x0208	; 0x800208 <__flp>
+ 3e6:	f0 91 09 02 	lds	r31, 0x0209	; 0x800209 <__flp+0x1>
+ 3ea:	20 e0       	ldi	r18, 0x00	; 0
+ 3ec:	30 e0       	ldi	r19, 0x00	; 0
+ 3ee:	a0 e0       	ldi	r26, 0x00	; 0
+ 3f0:	b0 e0       	ldi	r27, 0x00	; 0
+ 3f2:	30 97       	sbiw	r30, 0x00	; 0
+ 3f4:	19 f1       	breq	.+70     	; 0x43c <__LOCK_REGION_LENGTH__+0x3c>
+ 3f6:	40 81       	ld	r20, Z
+ 3f8:	51 81       	ldd	r21, Z+1	; 0x01
+ 3fa:	02 81       	ldd	r16, Z+2	; 0x02
+ 3fc:	13 81       	ldd	r17, Z+3	; 0x03
+ 3fe:	48 17       	cp	r20, r24
+ 400:	59 07       	cpc	r21, r25
+ 402:	c8 f0       	brcs	.+50     	; 0x436 <__LOCK_REGION_LENGTH__+0x36>
+ 404:	84 17       	cp	r24, r20
+ 406:	95 07       	cpc	r25, r21
+ 408:	69 f4       	brne	.+26     	; 0x424 <__LOCK_REGION_LENGTH__+0x24>
+ 40a:	10 97       	sbiw	r26, 0x00	; 0
+ 40c:	31 f0       	breq	.+12     	; 0x41a <__LOCK_REGION_LENGTH__+0x1a>
+ 40e:	12 96       	adiw	r26, 0x02	; 2
+ 410:	0c 93       	st	X, r16
+ 412:	12 97       	sbiw	r26, 0x02	; 2
+ 414:	13 96       	adiw	r26, 0x03	; 3
+ 416:	1c 93       	st	X, r17
+ 418:	27 c0       	rjmp	.+78     	; 0x468 <__LOCK_REGION_LENGTH__+0x68>
+ 41a:	00 93 08 02 	sts	0x0208, r16	; 0x800208 <__flp>
+ 41e:	10 93 09 02 	sts	0x0209, r17	; 0x800209 <__flp+0x1>
+ 422:	22 c0       	rjmp	.+68     	; 0x468 <__LOCK_REGION_LENGTH__+0x68>
+ 424:	21 15       	cp	r18, r1
+ 426:	31 05       	cpc	r19, r1
+ 428:	19 f0       	breq	.+6      	; 0x430 <__LOCK_REGION_LENGTH__+0x30>
+ 42a:	42 17       	cp	r20, r18
+ 42c:	53 07       	cpc	r21, r19
+ 42e:	18 f4       	brcc	.+6      	; 0x436 <__LOCK_REGION_LENGTH__+0x36>
+ 430:	9a 01       	movw	r18, r20
+ 432:	bd 01       	movw	r22, r26
+ 434:	ef 01       	movw	r28, r30
+ 436:	df 01       	movw	r26, r30
+ 438:	f8 01       	movw	r30, r16
+ 43a:	db cf       	rjmp	.-74     	; 0x3f2 <malloc+0x22>
+ 43c:	21 15       	cp	r18, r1
+ 43e:	31 05       	cpc	r19, r1
+ 440:	f9 f0       	breq	.+62     	; 0x480 <__LOCK_REGION_LENGTH__+0x80>
+ 442:	28 1b       	sub	r18, r24
+ 444:	39 0b       	sbc	r19, r25
+ 446:	24 30       	cpi	r18, 0x04	; 4
+ 448:	31 05       	cpc	r19, r1
+ 44a:	80 f4       	brcc	.+32     	; 0x46c <__LOCK_REGION_LENGTH__+0x6c>
+ 44c:	8a 81       	ldd	r24, Y+2	; 0x02
+ 44e:	9b 81       	ldd	r25, Y+3	; 0x03
+ 450:	61 15       	cp	r22, r1
+ 452:	71 05       	cpc	r23, r1
+ 454:	21 f0       	breq	.+8      	; 0x45e <__LOCK_REGION_LENGTH__+0x5e>
+ 456:	fb 01       	movw	r30, r22
+ 458:	93 83       	std	Z+3, r25	; 0x03
+ 45a:	82 83       	std	Z+2, r24	; 0x02
+ 45c:	04 c0       	rjmp	.+8      	; 0x466 <__LOCK_REGION_LENGTH__+0x66>
+ 45e:	90 93 09 02 	sts	0x0209, r25	; 0x800209 <__flp+0x1>
+ 462:	80 93 08 02 	sts	0x0208, r24	; 0x800208 <__flp>
+ 466:	fe 01       	movw	r30, r28
+ 468:	32 96       	adiw	r30, 0x02	; 2
+ 46a:	44 c0       	rjmp	.+136    	; 0x4f4 <__LOCK_REGION_LENGTH__+0xf4>
+ 46c:	fe 01       	movw	r30, r28
+ 46e:	e2 0f       	add	r30, r18
+ 470:	f3 1f       	adc	r31, r19
+ 472:	81 93       	st	Z+, r24
+ 474:	91 93       	st	Z+, r25
+ 476:	22 50       	subi	r18, 0x02	; 2
+ 478:	31 09       	sbc	r19, r1
+ 47a:	39 83       	std	Y+1, r19	; 0x01
+ 47c:	28 83       	st	Y, r18
+ 47e:	3a c0       	rjmp	.+116    	; 0x4f4 <__LOCK_REGION_LENGTH__+0xf4>
+ 480:	20 91 06 02 	lds	r18, 0x0206	; 0x800206 <__data_end>
+ 484:	30 91 07 02 	lds	r19, 0x0207	; 0x800207 <__data_end+0x1>
+ 488:	23 2b       	or	r18, r19
+ 48a:	41 f4       	brne	.+16     	; 0x49c <__LOCK_REGION_LENGTH__+0x9c>
+ 48c:	20 91 02 02 	lds	r18, 0x0202	; 0x800202 <__malloc_heap_start>
+ 490:	30 91 03 02 	lds	r19, 0x0203	; 0x800203 <__malloc_heap_start+0x1>
+ 494:	30 93 07 02 	sts	0x0207, r19	; 0x800207 <__data_end+0x1>
+ 498:	20 93 06 02 	sts	0x0206, r18	; 0x800206 <__data_end>
+ 49c:	20 91 00 02 	lds	r18, 0x0200	; 0x800200 <__DATA_REGION_ORIGIN__>
+ 4a0:	30 91 01 02 	lds	r19, 0x0201	; 0x800201 <__DATA_REGION_ORIGIN__+0x1>
+ 4a4:	21 15       	cp	r18, r1
+ 4a6:	31 05       	cpc	r19, r1
+ 4a8:	41 f4       	brne	.+16     	; 0x4ba <__LOCK_REGION_LENGTH__+0xba>
+ 4aa:	2d b7       	in	r18, 0x3d	; 61
+ 4ac:	3e b7       	in	r19, 0x3e	; 62
+ 4ae:	40 91 04 02 	lds	r20, 0x0204	; 0x800204 <__malloc_margin>
+ 4b2:	50 91 05 02 	lds	r21, 0x0205	; 0x800205 <__malloc_margin+0x1>
+ 4b6:	24 1b       	sub	r18, r20
+ 4b8:	35 0b       	sbc	r19, r21
+ 4ba:	e0 91 06 02 	lds	r30, 0x0206	; 0x800206 <__data_end>
+ 4be:	f0 91 07 02 	lds	r31, 0x0207	; 0x800207 <__data_end+0x1>
+ 4c2:	e2 17       	cp	r30, r18
+ 4c4:	f3 07       	cpc	r31, r19
+ 4c6:	a0 f4       	brcc	.+40     	; 0x4f0 <__LOCK_REGION_LENGTH__+0xf0>
+ 4c8:	2e 1b       	sub	r18, r30
+ 4ca:	3f 0b       	sbc	r19, r31
+ 4cc:	28 17       	cp	r18, r24
+ 4ce:	39 07       	cpc	r19, r25
+ 4d0:	78 f0       	brcs	.+30     	; 0x4f0 <__LOCK_REGION_LENGTH__+0xf0>
+ 4d2:	ac 01       	movw	r20, r24
+ 4d4:	4e 5f       	subi	r20, 0xFE	; 254
+ 4d6:	5f 4f       	sbci	r21, 0xFF	; 255
+ 4d8:	24 17       	cp	r18, r20
+ 4da:	35 07       	cpc	r19, r21
+ 4dc:	48 f0       	brcs	.+18     	; 0x4f0 <__LOCK_REGION_LENGTH__+0xf0>
+ 4de:	4e 0f       	add	r20, r30
+ 4e0:	5f 1f       	adc	r21, r31
+ 4e2:	50 93 07 02 	sts	0x0207, r21	; 0x800207 <__data_end+0x1>
+ 4e6:	40 93 06 02 	sts	0x0206, r20	; 0x800206 <__data_end>
+ 4ea:	81 93       	st	Z+, r24
+ 4ec:	91 93       	st	Z+, r25
+ 4ee:	02 c0       	rjmp	.+4      	; 0x4f4 <__LOCK_REGION_LENGTH__+0xf4>
+ 4f0:	e0 e0       	ldi	r30, 0x00	; 0
+ 4f2:	f0 e0       	ldi	r31, 0x00	; 0
+ 4f4:	cf 01       	movw	r24, r30
+ 4f6:	df 91       	pop	r29
+ 4f8:	cf 91       	pop	r28
+ 4fa:	1f 91       	pop	r17
+ 4fc:	0f 91       	pop	r16
+ 4fe:	08 95       	ret
+
+00000500 <free>:
+ 500:	cf 93       	push	r28
+ 502:	df 93       	push	r29
+ 504:	00 97       	sbiw	r24, 0x00	; 0
+ 506:	09 f4       	brne	.+2      	; 0x50a <free+0xa>
+ 508:	81 c0       	rjmp	.+258    	; 0x60c <free+0x10c>
+ 50a:	fc 01       	movw	r30, r24
+ 50c:	32 97       	sbiw	r30, 0x02	; 2
+ 50e:	13 82       	std	Z+3, r1	; 0x03
+ 510:	12 82       	std	Z+2, r1	; 0x02
+ 512:	a0 91 08 02 	lds	r26, 0x0208	; 0x800208 <__flp>
+ 516:	b0 91 09 02 	lds	r27, 0x0209	; 0x800209 <__flp+0x1>
+ 51a:	10 97       	sbiw	r26, 0x00	; 0
+ 51c:	81 f4       	brne	.+32     	; 0x53e <free+0x3e>
+ 51e:	20 81       	ld	r18, Z
+ 520:	31 81       	ldd	r19, Z+1	; 0x01
+ 522:	82 0f       	add	r24, r18
+ 524:	93 1f       	adc	r25, r19
+ 526:	20 91 06 02 	lds	r18, 0x0206	; 0x800206 <__data_end>
+ 52a:	30 91 07 02 	lds	r19, 0x0207	; 0x800207 <__data_end+0x1>
+ 52e:	28 17       	cp	r18, r24
+ 530:	39 07       	cpc	r19, r25
+ 532:	51 f5       	brne	.+84     	; 0x588 <free+0x88>
+ 534:	f0 93 07 02 	sts	0x0207, r31	; 0x800207 <__data_end+0x1>
+ 538:	e0 93 06 02 	sts	0x0206, r30	; 0x800206 <__data_end>
+ 53c:	67 c0       	rjmp	.+206    	; 0x60c <free+0x10c>
+ 53e:	ed 01       	movw	r28, r26
+ 540:	20 e0       	ldi	r18, 0x00	; 0
+ 542:	30 e0       	ldi	r19, 0x00	; 0
+ 544:	ce 17       	cp	r28, r30
+ 546:	df 07       	cpc	r29, r31
+ 548:	40 f4       	brcc	.+16     	; 0x55a <free+0x5a>
+ 54a:	4a 81       	ldd	r20, Y+2	; 0x02
+ 54c:	5b 81       	ldd	r21, Y+3	; 0x03
+ 54e:	9e 01       	movw	r18, r28
+ 550:	41 15       	cp	r20, r1
+ 552:	51 05       	cpc	r21, r1
+ 554:	f1 f0       	breq	.+60     	; 0x592 <free+0x92>
+ 556:	ea 01       	movw	r28, r20
+ 558:	f5 cf       	rjmp	.-22     	; 0x544 <free+0x44>
+ 55a:	d3 83       	std	Z+3, r29	; 0x03
+ 55c:	c2 83       	std	Z+2, r28	; 0x02
+ 55e:	40 81       	ld	r20, Z
+ 560:	51 81       	ldd	r21, Z+1	; 0x01
+ 562:	84 0f       	add	r24, r20
+ 564:	95 1f       	adc	r25, r21
+ 566:	c8 17       	cp	r28, r24
+ 568:	d9 07       	cpc	r29, r25
+ 56a:	59 f4       	brne	.+22     	; 0x582 <free+0x82>
+ 56c:	88 81       	ld	r24, Y
+ 56e:	99 81       	ldd	r25, Y+1	; 0x01
+ 570:	84 0f       	add	r24, r20
+ 572:	95 1f       	adc	r25, r21
+ 574:	02 96       	adiw	r24, 0x02	; 2
+ 576:	91 83       	std	Z+1, r25	; 0x01
+ 578:	80 83       	st	Z, r24
+ 57a:	8a 81       	ldd	r24, Y+2	; 0x02
+ 57c:	9b 81       	ldd	r25, Y+3	; 0x03
+ 57e:	93 83       	std	Z+3, r25	; 0x03
+ 580:	82 83       	std	Z+2, r24	; 0x02
+ 582:	21 15       	cp	r18, r1
+ 584:	31 05       	cpc	r19, r1
+ 586:	29 f4       	brne	.+10     	; 0x592 <free+0x92>
+ 588:	f0 93 09 02 	sts	0x0209, r31	; 0x800209 <__flp+0x1>
+ 58c:	e0 93 08 02 	sts	0x0208, r30	; 0x800208 <__flp>
+ 590:	3d c0       	rjmp	.+122    	; 0x60c <free+0x10c>
+ 592:	e9 01       	movw	r28, r18
+ 594:	fb 83       	std	Y+3, r31	; 0x03
+ 596:	ea 83       	std	Y+2, r30	; 0x02
+ 598:	49 91       	ld	r20, Y+
+ 59a:	59 91       	ld	r21, Y+
+ 59c:	c4 0f       	add	r28, r20
+ 59e:	d5 1f       	adc	r29, r21
+ 5a0:	ec 17       	cp	r30, r28
+ 5a2:	fd 07       	cpc	r31, r29
+ 5a4:	61 f4       	brne	.+24     	; 0x5be <free+0xbe>
+ 5a6:	80 81       	ld	r24, Z
+ 5a8:	91 81       	ldd	r25, Z+1	; 0x01
+ 5aa:	84 0f       	add	r24, r20
+ 5ac:	95 1f       	adc	r25, r21
+ 5ae:	02 96       	adiw	r24, 0x02	; 2
+ 5b0:	e9 01       	movw	r28, r18
+ 5b2:	99 83       	std	Y+1, r25	; 0x01
+ 5b4:	88 83       	st	Y, r24
+ 5b6:	82 81       	ldd	r24, Z+2	; 0x02
+ 5b8:	93 81       	ldd	r25, Z+3	; 0x03
+ 5ba:	9b 83       	std	Y+3, r25	; 0x03
+ 5bc:	8a 83       	std	Y+2, r24	; 0x02
+ 5be:	e0 e0       	ldi	r30, 0x00	; 0
+ 5c0:	f0 e0       	ldi	r31, 0x00	; 0
+ 5c2:	12 96       	adiw	r26, 0x02	; 2
+ 5c4:	8d 91       	ld	r24, X+
+ 5c6:	9c 91       	ld	r25, X
+ 5c8:	13 97       	sbiw	r26, 0x03	; 3
+ 5ca:	00 97       	sbiw	r24, 0x00	; 0
+ 5cc:	19 f0       	breq	.+6      	; 0x5d4 <free+0xd4>
+ 5ce:	fd 01       	movw	r30, r26
+ 5d0:	dc 01       	movw	r26, r24
+ 5d2:	f7 cf       	rjmp	.-18     	; 0x5c2 <free+0xc2>
+ 5d4:	8d 91       	ld	r24, X+
+ 5d6:	9c 91       	ld	r25, X
+ 5d8:	11 97       	sbiw	r26, 0x01	; 1
+ 5da:	9d 01       	movw	r18, r26
+ 5dc:	2e 5f       	subi	r18, 0xFE	; 254
+ 5de:	3f 4f       	sbci	r19, 0xFF	; 255
+ 5e0:	82 0f       	add	r24, r18
+ 5e2:	93 1f       	adc	r25, r19
+ 5e4:	20 91 06 02 	lds	r18, 0x0206	; 0x800206 <__data_end>
+ 5e8:	30 91 07 02 	lds	r19, 0x0207	; 0x800207 <__data_end+0x1>
+ 5ec:	28 17       	cp	r18, r24
+ 5ee:	39 07       	cpc	r19, r25
+ 5f0:	69 f4       	brne	.+26     	; 0x60c <free+0x10c>
+ 5f2:	30 97       	sbiw	r30, 0x00	; 0
+ 5f4:	29 f4       	brne	.+10     	; 0x600 <free+0x100>
+ 5f6:	10 92 09 02 	sts	0x0209, r1	; 0x800209 <__flp+0x1>
+ 5fa:	10 92 08 02 	sts	0x0208, r1	; 0x800208 <__flp>
+ 5fe:	02 c0       	rjmp	.+4      	; 0x604 <free+0x104>
+ 600:	13 82       	std	Z+3, r1	; 0x03
+ 602:	12 82       	std	Z+2, r1	; 0x02
+ 604:	b0 93 07 02 	sts	0x0207, r27	; 0x800207 <__data_end+0x1>
+ 608:	a0 93 06 02 	sts	0x0206, r26	; 0x800206 <__data_end>
+ 60c:	df 91       	pop	r29
+ 60e:	cf 91       	pop	r28
+ 610:	08 95       	ret
+
+00000612 <_exit>:
+ 612:	f8 94       	cli
+
+00000614 <__stop_program>:
+ 614:	ff cf       	rjmp	.-2      	; 0x614 <__stop_program>

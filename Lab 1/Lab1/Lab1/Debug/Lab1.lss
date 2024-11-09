@@ -1,0 +1,355 @@
+
+Lab1.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800200  00800200  00000212  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         000001be  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .comment      00000030  00000000  00000000  00000212  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000244  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000030  00000000  00000000  00000284  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000e20  00000000  00000000  000002b4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000c4a  00000000  00000000  000010d4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000003f3  00000000  00000000  00001d1e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000058  00000000  00000000  00002114  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    0000054e  00000000  00000000  0000216c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000211  00000000  00000000  000026ba  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000020  00000000  00000000  000028cb  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	71 c0       	rjmp	.+226    	; 0xe4 <__ctors_end>
+   2:	00 00       	nop
+   4:	79 c0       	rjmp	.+242    	; 0xf8 <__bad_interrupt>
+   6:	00 00       	nop
+   8:	77 c0       	rjmp	.+238    	; 0xf8 <__bad_interrupt>
+   a:	00 00       	nop
+   c:	75 c0       	rjmp	.+234    	; 0xf8 <__bad_interrupt>
+   e:	00 00       	nop
+  10:	73 c0       	rjmp	.+230    	; 0xf8 <__bad_interrupt>
+  12:	00 00       	nop
+  14:	71 c0       	rjmp	.+226    	; 0xf8 <__bad_interrupt>
+  16:	00 00       	nop
+  18:	6f c0       	rjmp	.+222    	; 0xf8 <__bad_interrupt>
+  1a:	00 00       	nop
+  1c:	6d c0       	rjmp	.+218    	; 0xf8 <__bad_interrupt>
+  1e:	00 00       	nop
+  20:	6b c0       	rjmp	.+214    	; 0xf8 <__bad_interrupt>
+  22:	00 00       	nop
+  24:	69 c0       	rjmp	.+210    	; 0xf8 <__bad_interrupt>
+  26:	00 00       	nop
+  28:	67 c0       	rjmp	.+206    	; 0xf8 <__bad_interrupt>
+  2a:	00 00       	nop
+  2c:	65 c0       	rjmp	.+202    	; 0xf8 <__bad_interrupt>
+  2e:	00 00       	nop
+  30:	63 c0       	rjmp	.+198    	; 0xf8 <__bad_interrupt>
+  32:	00 00       	nop
+  34:	61 c0       	rjmp	.+194    	; 0xf8 <__bad_interrupt>
+  36:	00 00       	nop
+  38:	5f c0       	rjmp	.+190    	; 0xf8 <__bad_interrupt>
+  3a:	00 00       	nop
+  3c:	5d c0       	rjmp	.+186    	; 0xf8 <__bad_interrupt>
+  3e:	00 00       	nop
+  40:	5b c0       	rjmp	.+182    	; 0xf8 <__bad_interrupt>
+  42:	00 00       	nop
+  44:	59 c0       	rjmp	.+178    	; 0xf8 <__bad_interrupt>
+  46:	00 00       	nop
+  48:	57 c0       	rjmp	.+174    	; 0xf8 <__bad_interrupt>
+  4a:	00 00       	nop
+  4c:	55 c0       	rjmp	.+170    	; 0xf8 <__bad_interrupt>
+  4e:	00 00       	nop
+  50:	53 c0       	rjmp	.+166    	; 0xf8 <__bad_interrupt>
+  52:	00 00       	nop
+  54:	51 c0       	rjmp	.+162    	; 0xf8 <__bad_interrupt>
+  56:	00 00       	nop
+  58:	4f c0       	rjmp	.+158    	; 0xf8 <__bad_interrupt>
+  5a:	00 00       	nop
+  5c:	4d c0       	rjmp	.+154    	; 0xf8 <__bad_interrupt>
+  5e:	00 00       	nop
+  60:	4b c0       	rjmp	.+150    	; 0xf8 <__bad_interrupt>
+  62:	00 00       	nop
+  64:	49 c0       	rjmp	.+146    	; 0xf8 <__bad_interrupt>
+  66:	00 00       	nop
+  68:	47 c0       	rjmp	.+142    	; 0xf8 <__bad_interrupt>
+  6a:	00 00       	nop
+  6c:	45 c0       	rjmp	.+138    	; 0xf8 <__bad_interrupt>
+  6e:	00 00       	nop
+  70:	43 c0       	rjmp	.+134    	; 0xf8 <__bad_interrupt>
+  72:	00 00       	nop
+  74:	41 c0       	rjmp	.+130    	; 0xf8 <__bad_interrupt>
+  76:	00 00       	nop
+  78:	3f c0       	rjmp	.+126    	; 0xf8 <__bad_interrupt>
+  7a:	00 00       	nop
+  7c:	3d c0       	rjmp	.+122    	; 0xf8 <__bad_interrupt>
+  7e:	00 00       	nop
+  80:	3b c0       	rjmp	.+118    	; 0xf8 <__bad_interrupt>
+  82:	00 00       	nop
+  84:	39 c0       	rjmp	.+114    	; 0xf8 <__bad_interrupt>
+  86:	00 00       	nop
+  88:	37 c0       	rjmp	.+110    	; 0xf8 <__bad_interrupt>
+  8a:	00 00       	nop
+  8c:	35 c0       	rjmp	.+106    	; 0xf8 <__bad_interrupt>
+  8e:	00 00       	nop
+  90:	33 c0       	rjmp	.+102    	; 0xf8 <__bad_interrupt>
+  92:	00 00       	nop
+  94:	31 c0       	rjmp	.+98     	; 0xf8 <__bad_interrupt>
+  96:	00 00       	nop
+  98:	2f c0       	rjmp	.+94     	; 0xf8 <__bad_interrupt>
+  9a:	00 00       	nop
+  9c:	2d c0       	rjmp	.+90     	; 0xf8 <__bad_interrupt>
+  9e:	00 00       	nop
+  a0:	2b c0       	rjmp	.+86     	; 0xf8 <__bad_interrupt>
+  a2:	00 00       	nop
+  a4:	29 c0       	rjmp	.+82     	; 0xf8 <__bad_interrupt>
+  a6:	00 00       	nop
+  a8:	27 c0       	rjmp	.+78     	; 0xf8 <__bad_interrupt>
+  aa:	00 00       	nop
+  ac:	25 c0       	rjmp	.+74     	; 0xf8 <__bad_interrupt>
+  ae:	00 00       	nop
+  b0:	23 c0       	rjmp	.+70     	; 0xf8 <__bad_interrupt>
+  b2:	00 00       	nop
+  b4:	21 c0       	rjmp	.+66     	; 0xf8 <__bad_interrupt>
+  b6:	00 00       	nop
+  b8:	1f c0       	rjmp	.+62     	; 0xf8 <__bad_interrupt>
+  ba:	00 00       	nop
+  bc:	1d c0       	rjmp	.+58     	; 0xf8 <__bad_interrupt>
+  be:	00 00       	nop
+  c0:	1b c0       	rjmp	.+54     	; 0xf8 <__bad_interrupt>
+  c2:	00 00       	nop
+  c4:	19 c0       	rjmp	.+50     	; 0xf8 <__bad_interrupt>
+  c6:	00 00       	nop
+  c8:	17 c0       	rjmp	.+46     	; 0xf8 <__bad_interrupt>
+  ca:	00 00       	nop
+  cc:	15 c0       	rjmp	.+42     	; 0xf8 <__bad_interrupt>
+  ce:	00 00       	nop
+  d0:	13 c0       	rjmp	.+38     	; 0xf8 <__bad_interrupt>
+  d2:	00 00       	nop
+  d4:	11 c0       	rjmp	.+34     	; 0xf8 <__bad_interrupt>
+  d6:	00 00       	nop
+  d8:	0f c0       	rjmp	.+30     	; 0xf8 <__bad_interrupt>
+  da:	00 00       	nop
+  dc:	0d c0       	rjmp	.+26     	; 0xf8 <__bad_interrupt>
+  de:	00 00       	nop
+  e0:	0b c0       	rjmp	.+22     	; 0xf8 <__bad_interrupt>
+	...
+
+000000e4 <__ctors_end>:
+  e4:	11 24       	eor	r1, r1
+  e6:	1f be       	out	0x3f, r1	; 63
+  e8:	cf ef       	ldi	r28, 0xFF	; 255
+  ea:	d1 e2       	ldi	r29, 0x21	; 33
+  ec:	de bf       	out	0x3e, r29	; 62
+  ee:	cd bf       	out	0x3d, r28	; 61
+  f0:	00 e0       	ldi	r16, 0x00	; 0
+  f2:	0c bf       	out	0x3c, r16	; 60
+  f4:	28 d0       	rcall	.+80     	; 0x146 <main>
+  f6:	61 c0       	rjmp	.+194    	; 0x1ba <_exit>
+
+000000f8 <__bad_interrupt>:
+  f8:	83 cf       	rjmp	.-250    	; 0x0 <__vectors>
+
+000000fa <delaynus>:
+	// This line returns a 0 value to the calling program
+	//  generally means no error was returned
+}
+
+void delaynus(int n) //   delay microsecond
+{
+  fa:	ac 01       	movw	r20, r24
+	int k;
+	for(k=0;k<n;k++)
+  fc:	18 16       	cp	r1, r24
+  fe:	19 06       	cpc	r1, r25
+ 100:	5c f4       	brge	.+22     	; 0x118 <delaynus+0x1e>
+ 102:	20 e0       	ldi	r18, 0x00	; 0
+ 104:	30 e0       	ldi	r19, 0x00	; 0
+    can be achieved.
+*/
+void
+_delay_loop_1(uint8_t __count)
+{
+	__asm__ volatile (
+ 106:	81 e0       	ldi	r24, 0x01	; 1
+ 108:	98 2f       	mov	r25, r24
+ 10a:	9a 95       	dec	r25
+ 10c:	f1 f7       	brne	.-4      	; 0x10a <delaynus+0x10>
+ 10e:	2f 5f       	subi	r18, 0xFF	; 255
+ 110:	3f 4f       	sbci	r19, 0xFF	; 255
+ 112:	42 17       	cp	r20, r18
+ 114:	53 07       	cpc	r21, r19
+ 116:	c1 f7       	brne	.-16     	; 0x108 <delaynus+0xe>
+ 118:	08 95       	ret
+
+0000011a <delaynms>:
+	_delay_loop_1(1);
+}
+void delaynms(int n) //   delay millisecond
+{
+ 11a:	0f 93       	push	r16
+ 11c:	1f 93       	push	r17
+ 11e:	cf 93       	push	r28
+ 120:	df 93       	push	r29
+	int k;
+	for(k=0;k<n;k++)
+ 122:	18 16       	cp	r1, r24
+ 124:	19 06       	cpc	r1, r25
+ 126:	54 f4       	brge	.+20     	; 0x13c <delaynms+0x22>
+ 128:	8c 01       	movw	r16, r24
+ 12a:	c0 e0       	ldi	r28, 0x00	; 0
+ 12c:	d0 e0       	ldi	r29, 0x00	; 0
+	delaynus(1000);
+ 12e:	88 ee       	ldi	r24, 0xE8	; 232
+ 130:	93 e0       	ldi	r25, 0x03	; 3
+ 132:	e3 df       	rcall	.-58     	; 0xfa <delaynus>
+	_delay_loop_1(1);
+}
+void delaynms(int n) //   delay millisecond
+{
+	int k;
+	for(k=0;k<n;k++)
+ 134:	21 96       	adiw	r28, 0x01	; 1
+ 136:	0c 17       	cp	r16, r28
+ 138:	1d 07       	cpc	r17, r29
+ 13a:	c9 f7       	brne	.-14     	; 0x12e <delaynms+0x14>
+	delaynus(1000);
+ 13c:	df 91       	pop	r29
+ 13e:	cf 91       	pop	r28
+ 140:	1f 91       	pop	r17
+ 142:	0f 91       	pop	r16
+ 144:	08 95       	ret
+
+00000146 <main>:
+
+void delaynus(int n);
+void delaynms(int n);
+
+int main(int argc, char *argv[]){
+	DDRL = 0b11111111; //  Sets all pins on PORTL to  output
+ 146:	8f ef       	ldi	r24, 0xFF	; 255
+ 148:	80 93 0a 01 	sts	0x010A, r24	; 0x80010a <__TEXT_REGION_LENGTH__+0x70010a>
+	PORTL = 0b01100000; // Sets error light pins
+ 14c:	90 e6       	ldi	r25, 0x60	; 96
+ 14e:	90 93 0b 01 	sts	0x010B, r25	; 0x80010b <__TEXT_REGION_LENGTH__+0x70010b>
+	DDRC = 0b11111111; //  Sets all pins on PORTC to  output
+ 152:	87 b9       	out	0x07, r24	; 7
+	PORTC = 0b11000000; //	Sets 2 LEDS on the left of the red row to be high
+ 154:	80 ec       	ldi	r24, 0xC0	; 192
+ 156:	88 b9       	out	0x08, r24	; 8
+
+	while(1){
+		//Starts moving the light string right by setting LED's high in sequence until the 4 leftmost LEDs are on
+		for(int i=0;i<2;i++){
+			delaynms(500);
+ 158:	84 ef       	ldi	r24, 0xF4	; 244
+ 15a:	91 e0       	ldi	r25, 0x01	; 1
+ 15c:	de df       	rcall	.-68     	; 0x11a <delaynms>
+			PORTC = (PORTC >> 1);
+ 15e:	88 b1       	in	r24, 0x08	; 8
+ 160:	86 95       	lsr	r24
+ 162:	88 b9       	out	0x08, r24	; 8
+			PORTC |= (1 << PC7); // Set PC7 (pin 7 of PORTC) to high
+ 164:	47 9a       	sbi	0x08, 7	; 8
+	PORTC = 0b11000000; //	Sets 2 LEDS on the left of the red row to be high
+
+	while(1){
+		//Starts moving the light string right by setting LED's high in sequence until the 4 leftmost LEDs are on
+		for(int i=0;i<2;i++){
+			delaynms(500);
+ 166:	84 ef       	ldi	r24, 0xF4	; 244
+ 168:	91 e0       	ldi	r25, 0x01	; 1
+ 16a:	d7 df       	rcall	.-82     	; 0x11a <delaynms>
+			PORTC = (PORTC >> 1);
+ 16c:	88 b1       	in	r24, 0x08	; 8
+ 16e:	86 95       	lsr	r24
+ 170:	88 b9       	out	0x08, r24	; 8
+			PORTC |= (1 << PC7); // Set PC7 (pin 7 of PORTC) to high
+ 172:	47 9a       	sbi	0x08, 7	; 8
+ 174:	c6 e0       	ldi	r28, 0x06	; 6
+ 176:	d0 e0       	ldi	r29, 0x00	; 0
+		}
+		
+		
+		//Shifts these 4 lights to the right until only 2 lights are left illuminated
+		for(int i=0;i<6;i++){
+			delaynms(500);
+ 178:	84 ef       	ldi	r24, 0xF4	; 244
+ 17a:	91 e0       	ldi	r25, 0x01	; 1
+ 17c:	ce df       	rcall	.-100    	; 0x11a <delaynms>
+			PORTC = (PORTC >> 1);
+ 17e:	88 b1       	in	r24, 0x08	; 8
+ 180:	86 95       	lsr	r24
+ 182:	88 b9       	out	0x08, r24	; 8
+ 184:	21 97       	sbiw	r28, 0x01	; 1
+		}
+		
+		
+		//Turns on the 2 lights that were extinguished by the shift
+		for(int i=0;i<2;i++){
+			delaynms(500);
+ 186:	c1 f7       	brne	.-16     	; 0x178 <main+0x32>
+ 188:	84 ef       	ldi	r24, 0xF4	; 244
+ 18a:	91 e0       	ldi	r25, 0x01	; 1
+ 18c:	c6 df       	rcall	.-116    	; 0x11a <delaynms>
+			PORTC = (PORTC << 1);
+ 18e:	88 b1       	in	r24, 0x08	; 8
+ 190:	88 0f       	add	r24, r24
+			PORTC |= (1 << PC0); // Set PC0 (pin 0 of PORTC) to high
+ 192:	88 b9       	out	0x08, r24	; 8
+		}
+		
+		
+		//Turns on the 2 lights that were extinguished by the shift
+		for(int i=0;i<2;i++){
+			delaynms(500);
+ 194:	40 9a       	sbi	0x08, 0	; 8
+ 196:	84 ef       	ldi	r24, 0xF4	; 244
+ 198:	91 e0       	ldi	r25, 0x01	; 1
+ 19a:	bf df       	rcall	.-130    	; 0x11a <delaynms>
+			PORTC = (PORTC << 1);
+ 19c:	88 b1       	in	r24, 0x08	; 8
+ 19e:	88 0f       	add	r24, r24
+ 1a0:	88 b9       	out	0x08, r24	; 8
+			PORTC |= (1 << PC0); // Set PC0 (pin 0 of PORTC) to high
+ 1a2:	40 9a       	sbi	0x08, 0	; 8
+ 1a4:	c6 e0       	ldi	r28, 0x06	; 6
+		}
+		
+		//Shifts back right
+		for(int i=0;i<6;i++){
+			delaynms(500);
+ 1a6:	d0 e0       	ldi	r29, 0x00	; 0
+ 1a8:	84 ef       	ldi	r24, 0xF4	; 244
+ 1aa:	91 e0       	ldi	r25, 0x01	; 1
+ 1ac:	b6 df       	rcall	.-148    	; 0x11a <delaynms>
+			PORTC = (PORTC << 1);
+ 1ae:	88 b1       	in	r24, 0x08	; 8
+ 1b0:	88 0f       	add	r24, r24
+ 1b2:	88 b9       	out	0x08, r24	; 8
+ 1b4:	21 97       	sbiw	r28, 0x01	; 1
+			PORTC = (PORTC << 1);
+			PORTC |= (1 << PC0); // Set PC0 (pin 0 of PORTC) to high
+		}
+		
+		//Shifts back right
+		for(int i=0;i<6;i++){
+ 1b6:	c1 f7       	brne	.-16     	; 0x1a8 <main+0x62>
+ 1b8:	cf cf       	rjmp	.-98     	; 0x158 <main+0x12>
+
+000001ba <_exit>:
+ 1ba:	f8 94       	cli
+
+000001bc <__stop_program>:
+ 1bc:	ff cf       	rjmp	.-2      	; 0x1bc <__stop_program>
