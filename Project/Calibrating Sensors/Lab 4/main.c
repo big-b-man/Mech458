@@ -99,3 +99,5 @@ ISR(ADC_vect)
 	}
 	ADC_result_flag = 1;
 }
+
+fuck bitches get money
