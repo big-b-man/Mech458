@@ -15,7 +15,7 @@ int main()
 	timer8MHz();//setup the chip clock to 8 MHz
 	DDRL = 0xFF;//sets debug lights to output
 	DDRB = 0x03;//sets D0 and D1 to output
-	DDRE = 0b00;//all E pins on input
+	DDRE = 0x00;//all E pins on input
 	PORTL = motorState << 6;
 	
 	//Initialize LCD module
@@ -25,20 +25,13 @@ int main()
 	LCDClear();
 	LCDWriteString("Program Setup");
 	mTimer(500);
-	LCDClear();
-	LCDWriteString("loading");
-	mTimer(2000);
-	LCDClear();
-	LCDWriteString("ADC Value:");
-	LCDGotoXY(0,1);
-	LCDWriteString("Optical:0");
 	PORTB = motorState;
 	
 	cli(); // disable all of the interrupt ==================================
 
 	// config the external interrupt ========================================
 	EIMSK |= (1 << INT2) | (1 << INT5);        // enable INT2 and INT5
-	EICRA |= (1 << ISC21);					   // falling edge interrupt for INT2
+	EICRA |= (1 << ISC21) | (1 << ISC20);					   // rising edge interrupt for INT2
 	EICRB |= (1 << ISC50);					   // any edge interrupt for INT5
 
 	// config ADC ===========================================================
@@ -101,12 +94,19 @@ int main()
 } // end main
 
 // sensor switch: Active HIGH starts AD conversion ==========================
-ISR(INT2_vect)
+ISR(INT2_vect) //Controls program pause button. Holds the program in the interupt until pause it pressed again.
 {
-	ADC_result = 999;
+	LCDClear();
+	LCDWriteString("Program Paused");
+	mTimer(500);
+	while (!(PIND & (1 << PIND2))){
+		};
+	LCDClear();
+	mTimer(1000);
+	EIFR |= (1 << INTF2);//for some reason the interrupt automatically re triggers unless I explicitly clear the flag at the end.
 }
 
-ISR(INT5_vect)// Interrupt 5, Triggered by the optical sensor next to the reflectivity sensor
+ISR(INT5_vect)// Interrupt 5, Triggered by6 the optical sensor next to the reflectivity sensor
 {
     mTimer(20);//de-bouncing
 	if (PINE & (1 << PINE5)) {
