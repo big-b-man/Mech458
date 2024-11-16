@@ -7,7 +7,7 @@
 // define the global variables that can be used in every function ===========
 volatile uint16_t ADC_result = 455;
 volatile unsigned int ADC_result_flag;
-volatile unsigned char motorState = 0x00;
+volatile unsigned char motorState = 0x02;// motor set forward
 
 int main()
 {
@@ -22,28 +22,20 @@ int main()
 
 	//Clear the screen
 	LCDClear();
-	LCDWriteString("Program Setup");
-	mTimer(500);
-	LCDClear();
-	LCDWriteString("loading");
-	mTimer(2000);
-	LCDClear();
 	LCDWriteString("ADC Value:");
-	LCDGotoXY(0,1);
-	LCDWriteString("Optical:0");
-	PORTB = motorState;
+	PORTB |= motorState;
 	
 	cli(); // disable all of the interrupt ==================================
 
 	// config the external interrupt ========================================
-	EIMSK |= ( _BV(INT2));                     // enable INT2
-	EICRA |= ( _BV(ISC21));                    // rising edge interrupt
-
+	EIMSK |= ( 1 << INT2) | (1 << INT1)  | (1 << INT5);                   // enable INT 5, INT2 and INT1
+	EICRA |= (1 << ISC21) | (1 << ISC20) | (1 << ISC11) | (1 << ISC10);	  // rising edge interrupt
+	EICRB |= (1 << ISC51);                                                // falling edge interupt
 	// config ADC ===========================================================
 	// by default, the ADC input (analog input) is set to ADC0 / PORTF0
-	ADCSRA |= _BV(ADEN);                       // enable ADC
-	ADCSRA |= _BV(ADIE);                       // enable interrupt of ADC
-	ADMUX |= _BV(REFS0);           //AVCC with external capacitor at AREF pin
+	ADCSRA |= (1 << ADEN);                       // enable ADC
+	ADCSRA |= (1 << ADIE);                       // enable interrupt of ADC
+	ADMUX |= (1 << REFS0);           //AVCC with external capacitor at AREF pin
 
 	// sets the Global Enable for all interrupts ============================
 	sei();
@@ -52,11 +44,11 @@ int main()
 	pwmSet(102);
 
 	// initialize the ADC, start one conversion at the beginning ============
-	ADCSRA |= _BV(ADSC);
+	ADCSRA |= (1<<(ADSC));
 	
 	while (1)
 	{
-		PORTL = (PINE & 0b00100000) << 2;
+		PORTL = (PINE & (1 << PINE5)) << 2;
 		if (ADC_result_flag)
 		{
 			LCDGotoXY(10,0);
@@ -68,15 +60,26 @@ int main()
 	}
 } // end main
 
-// sensor switch: Active HIGH starts AD conversion ==========================
+ISR(INT1_vect)
+{
+	mTimer(20);
+	motorState ^= 0x02;//stop and start motor
+	PORTB = (motorState & 0x03);
+	while(PIND & (1 << PIND1)){};//wait for button to be released
+	mTimer(20);
+	EIFR |= (1 << INTF1);//for some reason the interrupt automatically re triggers unless I explicitly clear the flag at the end.
+}
+
 ISR(INT2_vect)
 {
 	ADC_result = 999;
 }
 
-ISR(INT4_vect)
+ISR(INT5_vect)
 {
-	//interupt code
+	mTimer(1000);
+	ADC_result = 999;
+	EIFR |= (1 << INTF5);
 }
 
 // the interrupt will be triggered if the ADC is done =======================
