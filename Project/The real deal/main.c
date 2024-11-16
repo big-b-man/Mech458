@@ -98,15 +98,18 @@ ISR(INT2_vect) //Controls program pause button. Holds the program in the interup
 {
 	LCDClear();
 	LCDWriteString("Program Paused");
-	mTimer(500);
-	while (!(PIND & (1 << PIND2))){
-		};
+	mTimer(20);
+	while(PIND & (1 << PIND2)){};//wait for button to be released
+	mTimer(20);	
+	while (!(PIND & (1 << PIND2))){};//wait for button to be pressed again
 	LCDClear();
-	mTimer(1000);
+	mTimer(20);
+	while(PIND & (1 << PIND2)){};//wait for button to be released
+	mTimer(20);
 	EIFR |= (1 << INTF2);//for some reason the interrupt automatically re triggers unless I explicitly clear the flag at the end.
 }
 
-ISR(INT5_vect)// Interrupt 5, Triggered by6 the optical sensor next to the reflectivity sensor
+ISR(INT5_vect)// Interrupt 5, Triggered the optical sensor next to the reflectivity sensor
 {
     mTimer(20);//de-bouncing
 	if (PINE & (1 << PINE5)) {
@@ -114,9 +117,8 @@ ISR(INT5_vect)// Interrupt 5, Triggered by6 the optical sensor next to the refle
 		STATE = 1;
 	    } else {
 	    // INT5 pin is low
-	    
+		}
 		//enque code
-    }
 }
 
 // the interrupt will be triggered if the ADC is done =======================
