@@ -4,19 +4,6 @@
 
 #define HALL_SENSOR_PIN PIND7 //connected to D38
 
-void homeMotor(void);
-int main(){
-	/*array containing stepper signal control sequence*/
-	timer8MHz();
-	
-	DDRA = 0xFF; //Sets PortA to output
-	DDRC = 0xFF; //Sets PortC to output
-	DDRL = 0xFF; //Sets PortL to output
-	
-	DDRD &= ~(1<< HALL_SENSOR_PIN); //SET HALL SENSOR PIN AS INPUT
-	homeMotor();
-	return 0;
-}
 void homeMotor(void) {
 	const char motorSteps[] = { 0b00110000,
 		0b00000110,
