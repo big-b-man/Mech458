@@ -3,6 +3,7 @@
 #include "lcd.h"
 #include "Timer.h"
 #include "pwm.h"
+#include "initializeMotor.h"
 
 // define the global variables that can be used in every function ===========
 volatile uint16_t ADC_result = 999;
@@ -10,10 +11,17 @@ volatile unsigned int ADC_result_flag = 1;
 volatile unsigned char motorState = 0x02;
 volatile char STATE = 0;
 volatile char sorted_items[4] = {0,0,0,0};
+volatile char stepNum;
 
 int main() {
+	const char motorSteps[] = { 0b00110000,
+		0b00000110,
+		0b00101000,
+	0b00000101 };// steps for stepper motor
+	
 	timer8MHz();//setup the chip clock to 8 MHz
 	DDRL = 0xFF;//sets debug lights to output
+	DDRA = 0xFF;//stepper output
 	DDRB = 0x03;//sets D0 and D1 to output
 	DDRE = 0x00;//all E pins on input
 	PORTL = motorState << 6;
@@ -43,6 +51,9 @@ int main() {
 	// sets the Global Enable for all interrupts ============================
 	sei();
 	
+	//stepper initialization.
+	stepNum = homeMotor();
+	PORTA = motorSteps[stepNum];
 	
 	//pwm setup to 40% duty cycle
 	pwm();
