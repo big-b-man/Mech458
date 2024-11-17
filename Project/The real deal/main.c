@@ -4,7 +4,7 @@
 #include "lcd.h"
 #include "Timer.h"
 #include "pwm.h"
-#include "initializeMotor.h"
+#include "stepperMotor.h"
 #include "LinkedQueue.h"
 
 // define the global variables that can be used in every function ===========
@@ -13,15 +13,8 @@ volatile unsigned int ADC_result_flag = 1;
 volatile unsigned char motorState = 0x02;
 volatile char STATE = 0;
 volatile char sorted_items[4] = {0,0,0,0};
-volatile char stepNum;
-volatile char sorterbin = 0;//0 = black, 1 = AL, 2 = white, 3 = FE.
-
-const char motorSteps[] = { 0b00110000,
-	0b00000110,
-	0b00101000,
-0b00000101 };// steps for stepper motor
-
-int moveStepper(int dir, int moveNum);
+volatile int stepNum;
+volatile int sorterbin = 0;//0 = black, 1 = AL, 2 = white, 3 = FE.
 
 int main() {
 	timer8MHz();//setup the chip clock to 8 MHz
@@ -117,43 +110,9 @@ int main() {
 		dequeue(&head,&tail,&rtnLink);
 		LCDClear();
 		LCDWriteInt(rtnLink->e.number,1);
-		switch(rtnLink->e.number){
-			case(0)://Black Delrin
-			{
-				const uint16_t moveDir[] = {0,1,0,0};
-				const uint16_t moveNum[] = {0,50,100,50};
-				moveStepper(moveDir[sorterbin],moveNum[sorterbin]);
-				sorterbin = 0;
-				motorState = 0x02;
-				PORTB |= motorState;
-				break;
-			}
-			case(1)://White Delrin
-			{
-				const uint16_t moveDir[] = {0,0,0,1};
-				const uint16_t moveNum[] = {100,50,0,50};
-				moveStepper(moveDir[sorterbin],moveNum[sorterbin]);
-				sorterbin = 2;
-				motorState = 0x02;
-				PORTB |= motorState;
-				break;
-			}
-			case(2)://Steel
-			{
-				const uint16_t moveDir[] = {1,0,0,0};
-				const uint16_t moveNum[] = {50,100,0,50};
-				moveStepper(moveDir[sorterbin],moveNum[sorterbin]);
-				sorterbin = 3;
-				motorState = 0x02;
-				PORTB |= motorState;
-				break;
-			}
-			break;
-			case(3)://Aluminum
-			
-			break;
-			free(rtnLink);
-		}
+		const unsigned char moveSteps[] = {0,50,100,-50};
+		moveStepper(1,stepNum);
+		free(rtnLink);
 		//Reset the state variable
 		STATE = 0;
 		goto POLLING_STAGE;
@@ -177,11 +136,11 @@ int main() {
 		if(ADC_result > material_types[0]){
 			material = 0;//black delrin
 			} else if (ADC_result > material_types[1]) {
-			material = 1;//white delrin
+			material = 2;//white delrin
 			} else if (ADC_result > material_types[2]) {
-			material = 2; //Steel
+			material = 3; //Steel
 			} else {
-			material = 3;//aluminum
+			material = 1;//aluminum
 		}
 		sorted_items[material]++;
 		initLink(&newLink); //creates new link and stores input to linked lsit.
@@ -263,43 +222,4 @@ ISR(ADC_vect)
 ISR(BADISR_vect)
 {
 	PORTL = 0xF0;//light up everything to let us know it's screwed
-}
-
-int moveStepper(int dir, int moveNum){
-	const int forSteps[] = {0,1,2,3};
-	const int backSteps[] = {2,3,0,1};
-	int *ptr;
-	if(dir == 0){
-		ptr = forSteps;
-		} else {
-		ptr = backSteps;
-	}
-	for(int i=0; i < moveNum; i++){
-		switch(stepNum){
-			case(3):
-			PORTA = motorSteps[*ptr];
-			PORTC = 0x01;
-			stepNum = *ptr;
-			break;
-			case(0):
-			PORTA = motorSteps[*(ptr+1)];
-			PORTC = 0x02;
-			stepNum = *(ptr+1);
-			break;
-			case(1):
-			PORTA = motorSteps[*(ptr+2)];
-			PORTC = 0x04;
-			stepNum = *(ptr+2);
-			break;
-			case(2):
-			PORTA = motorSteps[*(ptr+3)];
-			PORTC = 0x08;
-			stepNum = *(ptr+3);
-			break;
-			default:
-			break;
-		}
-		mTimer(20);
-	}
-	return(stepNum);
 }

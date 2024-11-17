@@ -122,10 +122,10 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="initializeMotor.c">
+    <Compile Include="stepperMotor.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="initializeMotor.h">
+    <Compile Include="stepperMotor.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="LCD.c">
