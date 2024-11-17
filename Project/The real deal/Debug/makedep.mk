@@ -6,6 +6,8 @@ initializeMotor.c
 
 LCD.c
 
+LinkedQueue.c
+
 main.c
 
 pwm.c
