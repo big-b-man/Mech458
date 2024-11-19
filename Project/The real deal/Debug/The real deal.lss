@@ -467,7 +467,7 @@ int moveStepper(int moveNum, int stepNum){
 			default:
 			break;
 		}
-		mTimer(20);
+		mTimer(20); //turn this into a function that changes the delay with each step.
  278:	84 e1       	ldi	r24, 0x14	; 20
  27a:	90 e0       	ldi	r25, 0x00	; 0
  27c:	dd d3       	rcall	.+1978   	; 0xa38 <mTimer>
@@ -486,7 +486,7 @@ int moveStepper(int moveNum, int stepNum){
  28a:	b0 cf       	rjmp	.-160    	; 0x1ec <moveStepper+0x66>
 			break;
 		}
-		mTimer(20);
+		mTimer(20); //turn this into a function that changes the delay with each step.
 	}
 	return(stepNum);
  28c:	c8 01       	movw	r24, r16
