@@ -18,7 +18,7 @@ int homeMotor(void) {//This is the function you made in the lab Cody. The only d
 			PORTA = 0x00; // STOPS MOTOR
 			return(stepIdx);
 			} else {
-			PORTL = 0b11000000;	
+			PORTL = 0b11000000;
 			//MOVE ONE STEP
 			PORTA = motorSteps[stepIdx];
 			stepIdx = (stepIdx + 1) % 4; //cycle through steps
@@ -36,7 +36,30 @@ int moveStepper(int moveNum, int stepNum){//You will write a subroutine for this
 		int backSteps[] = {2,3,0,1};
 		ptr = backSteps;
 	}
-	for(int i=0; i < moveNum; i++){
+	
+	
+	// Define trapezoidal profile parameters
+	int accelSteps = moveNum / 4;              // Number of steps for acceleration
+	int decelSteps = moveNum / 4;              // Number of steps for deceleration
+	int constSteps = moveNum - accelSteps - decelSteps; // Remaining steps at constant speed
+	int minDelay = 5;                          // Minimum delay (top speed) in ms
+	int maxDelay = 20;                         // Maximum delay (start and end) in ms
+
+	for (int i = 0; i < moveNum; i++) {
+		
+		// Calculate the current delay based on position in the profile
+		int currentDelay;
+		if (i < accelSteps) {
+			// Acceleration phase: delay decreases
+			currentDelay = maxDelay - (i * (maxDelay - minDelay) / accelSteps);
+			} else if (i < accelSteps + constSteps) {
+			// Constant speed phase: delay is constant
+			currentDelay = minDelay;
+			} else {
+			// Deceleration phase: delay increases
+			currentDelay = minDelay + ((i - accelSteps - constSteps) * (maxDelay - minDelay) / decelSteps);
+		}
+		
 		switch(stepNum){
 			case(3):
 			PORTA = motorSteps[*ptr];
@@ -61,7 +84,9 @@ int moveStepper(int moveNum, int stepNum){//You will write a subroutine for this
 			default:
 			break;
 		}
-		mTimer(20); //turn this into a function that changes the delay with each step.
+		mTimer(currentDelay); //turn this into a function that changes the delay with each step.
 	}
 	return(stepNum);
 }
+
+
