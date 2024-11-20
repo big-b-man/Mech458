@@ -5,11 +5,20 @@
 
 #define HALL_SENSOR_PIN PIND7 // Connected to D38
 
+/* old table
 const char motorSteps[] = {
 	0b00110000,  // Step 0
 	0b00000110,  // Step 1
 	0b00101000,  // Step 2
 	0b00000101   // Step 3
+};
+*/
+
+const char motorSteps[] = {
+	0b00110101,  // Step 0
+	0b00110110,  // Step 1
+	0b00101110,  // Step 2
+	0b00101101   // Step 3
 };
 
 // Lookup table for 90 degree and 180 degree moves
@@ -18,6 +27,107 @@ const char motorSteps[] = {
 
 int delayTable90[MAX_STEPS_90]; // Delay table for 90 degree turns
 int delayTable180[MAX_STEPS_180]; // Delay table for 180 degree turns
+int tempTable[] = {20,
+	19,
+	18,
+	17,
+	16,
+	15,
+	14,
+	13,
+	12,
+	11,
+	10,
+	9,
+	8,
+	7,
+	6,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	5,
+	6,
+	7,
+	8,
+	9,
+	10,
+	11,
+	12,
+	13,
+	14,
+	15,
+	16,
+	17,
+	18,
+	19,
+	20,
+};
 
 int delayTablesInitialized = 0; // Flag to check if tables have been computed
 
@@ -71,14 +181,13 @@ int homeMotor(void) {
 			PORTL = 0b11000000;
 			stepIdx = (stepIdx + 1) % 4; // Cycle through steps
 			PORTA = motorSteps[stepIdx];
-			mTimer(10); // Delay for motor movement
+			mTimer(20); // Delay for motor movement
 		}
 	}
 }
 
 // Function to move the stepper motor with variable delay based on the lookup table
 void moveStepper(int moveNum, int* stepNumInput){
-	LCDClear();
 	int stepNum = *stepNumInput;
 	int *ptr;
 	if(moveNum >= 0){
@@ -110,18 +219,13 @@ void moveStepper(int moveNum, int* stepNumInput){
 			default:
 			break;
 		}
-		if (stepNum == 50){
-			LCDGotoXY(0,0);
-			LCDWriteInt(delayTable90[i],2);
+		if (moveNum == 50){
 			mTimer(delayTable90[i]);
-			} else if (stepNum == 100){
+			} else if (moveNum == 100){
 			mTimer(delayTable180[i]);
-			LCDGotoXY(0,0);
-			LCDWriteInt(delayTable90[i],2);
 			} else {
 			mTimer(20);
 		}
 	}
-	LCDClear();
 	*stepNumInput = stepNum;
 }

@@ -7,10 +7,10 @@
 #define HALL_SENSOR_PIN PIND7 // Connected to D38
 
 const char motorSteps[] = {
-	0b00110000,  // Step 0
-	0b00000110,  // Step 1
-	0b00101000,  // Step 2
-	0b00000101   // Step 3
+	0b00110101,  // Step 0
+	0b00110110,  // Step 1
+	0b00101110,  // Step 2
+	0b00101101   // Step 3
 };
 
 // Lookup table for 90 degree and 180 degree moves
@@ -24,11 +24,11 @@ int delayTablesInitialized = 0; // Flag to check if tables have been computed
 
 // Function to initialize the delay table with the trapezoidal profile
 void initializeDelayTable(int *delayTable, int maxSteps) {
-	int accelSteps = maxSteps * 0.1;               // Number of steps for acceleration
-	int decelSteps = maxSteps * 0.1;               // Number of steps for deceleration
+	int accelSteps = maxSteps * 0.40;               // Number of steps for acceleration
+	int decelSteps = maxSteps * 0.40;               // Number of steps for deceleration
 	int constSteps = maxSteps - accelSteps - decelSteps; // Remaining steps at constant speed
 	int minDelay = 5;                           // Minimum delay (top speed) in ms
-	int maxDelay = 10;                          // Maximum delay (start and end) in ms
+	int maxDelay = 20;                          // Maximum delay (start and end) in ms
 
 	for (int i = 0; i < maxSteps; i++) {
 		int currentDelay;
@@ -72,14 +72,13 @@ int homeMotor(void) {
 			PORTL = 0b11000000;
 			stepIdx = (stepIdx + 1) % 4; // Cycle through steps
 			PORTA = motorSteps[stepIdx];
-			mTimer(10); // Delay for motor movement
+			mTimer(20); // Delay for motor movement
 		}
 	}
 }
 
 // Function to move the stepper motor with variable delay based on the lookup table
 void moveStepper(int moveNum, int* stepNumInput){
-	LCDClear();
 	int stepNum = *stepNumInput;
 	int *ptr;
 	if(moveNum >= 0){
@@ -111,11 +110,11 @@ void moveStepper(int moveNum, int* stepNumInput){
 			default:
 			break;
 		}
-		if (stepNum == 50){
+		if (moveNum == 50){
 			LCDGotoXY(0,0);
 			LCDWriteInt(delayTable90[i],2);
 			mTimer(delayTable90[i]);
-			} else if (stepNum == 100){
+			} else if (moveNum == 100){
 			mTimer(delayTable180[i]);
 			LCDGotoXY(0,0);
 			LCDWriteInt(delayTable90[i],2);
@@ -123,6 +122,5 @@ void moveStepper(int moveNum, int* stepNumInput){
 			mTimer(20);
 		}
 	}
-	LCDClear();
 	*stepNumInput = stepNum;
 }
