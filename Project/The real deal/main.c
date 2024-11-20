@@ -11,12 +11,12 @@
 volatile uint16_t ADC_result = 999;
 volatile unsigned int ADC_result_flag = 1;
 volatile unsigned char motorState = 0x02;
-volatile char STATE = 0;
+volatile char STATE = 2;// for warm up
 volatile char sorted_items[4] = {0,0,0,0};
-volatile int stepNum;
-volatile int sorterbin = 0;//0 = black, 1 = AL, 2 = white, 3 = FE.
+volatile int sorterbin = 0;//0 = black, 1 = AL, 2 = white, 3 = FE. 
 
 int main() {
+	int stepNum;
 	timer8MHz();//setup the chip clock to 8 MHz
 	DDRL = 0xFF;//sets debug lights to output
 	DDRA = 0xFF;//stepper output
@@ -52,6 +52,9 @@ int main() {
 	//stepper initialization.
 	LCDClear();
 	
+	//setup step tables
+	precomputeDelayTables();
+	
 	stepNum = homeMotor();
 	PORTA = motorSteps[stepNum];
 	
@@ -66,9 +69,11 @@ int main() {
 	rtnLink = NULL;
 	newLink = NULL;
 	
+	STATE = 0;
 	//pwm setup to 40% duty cycle
 	pwm();
 	pwmSet(102);
+	motorState = 0x02;
 	PORTB |= motorState;
 
 	goto POLLING_STAGE;
@@ -108,11 +113,32 @@ int main() {
 	{
 		// Do whatever is necessary HERE
 		dequeue(&head,&tail,&rtnLink);
-		LCDClear();
-		LCDWriteInt(rtnLink->e.number,1);
-		const unsigned char moveSteps[] = {0,50,100,-50};
-		moveStepper(1,stepNum);
+		
+		/*Array telling the sorter how to move. 
+		Rows are where we are, columns are where we are going*/
+		int binMovements [4][4] =	{{0,50,100,-50},
+			{-50,0,50,100},
+			{100,-50,0,50},
+			{50,100,-50,0}};				
+		//move stepper to new bin according to where we are
+		moveStepper(binMovements[sorterbin][rtnLink->e.number],&stepNum);
+		sorterbin = rtnLink->e.number;
+		motorState = 0x02;
+		PORTB |= motorState;
 		free(rtnLink);
+		LCDClear();
+		LCDGotoXY(0,0);
+		LCDWriteString("BL FE WI AL");
+		LCDGotoXY(12,0);
+		LCDWriteInt(ADC_result,3);
+		LCDGotoXY(0,1);
+		LCDWriteInt(sorted_items[0],2);
+		LCDGotoXY(3,1);
+		LCDWriteInt(sorted_items[1],2);
+		LCDGotoXY(6,1);
+		LCDWriteInt(sorted_items[2],2);
+		LCDGotoXY(9,1);
+		LCDWriteInt(sorted_items[3],2);
 		//Reset the state variable
 		STATE = 0;
 		goto POLLING_STAGE;
@@ -148,7 +174,7 @@ int main() {
 		enqueue(&head, &tail, &newLink);
 		
 		LCDGotoXY(0,0);
-		LCDWriteString("BL WI FE AL");
+		LCDWriteString("BL AL WI FE");
 		LCDGotoXY(12,0);
 		LCDWriteInt(ADC_result,3);
 		LCDGotoXY(0,1);
@@ -172,6 +198,7 @@ ISR(INT0_vect)
 	motorState = 0x00;//stop motor
 	PORTB = motorState & 0x03;
 	STATE = 2;
+	EIFR |= (1 << INTF0);
 }
 
 ISR(INT2_vect) //Controls program pause button. Holds the program in the interupt until pause it pressed again.
@@ -188,8 +215,12 @@ ISR(INT2_vect) //Controls program pause button. Holds the program in the interup
 	mTimer(20);
 	while(PIND & (1 << PIND2)){};//wait for button to be released
 	mTimer(20);
-	motorState = 0x02;//start motor
-	PORTB = (motorState & 0x03);
+	if(STATE == 2) {//if in bucket stage
+		//do nothing
+	} else { //restart the motor otherwise
+			motorState = 0x02;//start motor
+			PORTB = (motorState & 0x03);
+	}
 	EIFR |= (1 << INTF2);//for some reason the interrupt automatically re triggers unless I explicitly clear the flag at the end.
 }
 

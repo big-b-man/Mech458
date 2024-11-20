@@ -2,7 +2,6 @@
 #include <avr/io.h>
 #include "timer.h"
 #include "stepperMotor.h"
-#include "lcd.h"
 
 #define HALL_SENSOR_PIN PIND7 // Connected to D38
 
