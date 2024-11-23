@@ -2,7 +2,7 @@
 
 /* Type definitions */
 typedef struct {
-	char number;	/*2 bit number bing stored*/
+	uint16_t number;	/*2 bit number bing stored*/
 } element;
 
 typedef struct link{

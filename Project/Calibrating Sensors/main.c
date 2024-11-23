@@ -5,7 +5,7 @@
 #include "pwm.h"
 
 // define the global variables that can be used in every function ===========
-volatile uint16_t ADC_result = 455;
+volatile uint16_t ADC_result = 1023;
 volatile unsigned int ADC_result_flag;
 volatile unsigned char motorState = 0x02;// motor set forward
 
@@ -41,7 +41,7 @@ int main()
 	sei();
 	
 	pwm();
-	pwmSet(102);
+	pwmSet(77);
 
 	// initialize the ADC, start one conversion at the beginning ============
 	ADCSRA |= (1<<(ADSC));
@@ -87,7 +87,7 @@ ISR(ADC_vect)
 {
 	uint16_t ADC_result_last = ADC_result;
 	ADC_result = ADCL;
-	ADC_result |= (ADCH && 0x03) << 8;
+	ADC_result |= ADCH << 8;
 	if((ADC_result < ADC_result_last)/* && (ADC_result > (ADC_result_last-20))*/){
 		} else {
 		ADC_result = ADC_result_last;

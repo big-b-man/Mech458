@@ -5,15 +5,6 @@
 
 #define HALL_SENSOR_PIN PIND7 // Connected to D38
 
-/* old table
-const char motorSteps[] = {
-	0b00110000,  // Step 0
-	0b00000110,  // Step 1
-	0b00101000,  // Step 2
-	0b00000101   // Step 3
-};
-*/
-
 const char motorSteps[] = {
 	0b00110101,  // Step 0
 	0b00110110,  // Step 1
@@ -22,151 +13,9 @@ const char motorSteps[] = {
 };
 
 // Lookup table for 90 degree and 180 degree moves
-#define MAX_STEPS_90 50
-#define MAX_STEPS_180 100
 
-int delayTable90[MAX_STEPS_90]; // Delay table for 90 degree turns
-int delayTable180[MAX_STEPS_180]; // Delay table for 180 degree turns
-int tempTable[] = {20,
-	19,
-	18,
-	17,
-	16,
-	15,
-	14,
-	13,
-	12,
-	11,
-	10,
-	9,
-	8,
-	7,
-	6,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	5,
-	6,
-	7,
-	8,
-	9,
-	10,
-	11,
-	12,
-	13,
-	14,
-	15,
-	16,
-	17,
-	18,
-	19,
-	20,
-};
-
-int delayTablesInitialized = 0; // Flag to check if tables have been computed
-
-// Function to initialize the delay table with the trapezoidal profile
-void initializeDelayTable(int *delayTable, int maxSteps) {
-	int accelSteps = maxSteps * 0.1;               // Number of steps for acceleration
-	int decelSteps = maxSteps * 0.1;               // Number of steps for deceleration
-	int constSteps = maxSteps - accelSteps - decelSteps; // Remaining steps at constant speed
-	int minDelay = 5;                           // Minimum delay (top speed) in ms
-	int maxDelay = 10;                          // Maximum delay (start and end) in ms
-
-	for (int i = 0; i < maxSteps; i++) {
-		int currentDelay;
-		if (i < accelSteps) {
-			// Acceleration phase: delay decreases
-			currentDelay = maxDelay - (i * (maxDelay - minDelay) / accelSteps);
-			} else if (i < accelSteps + constSteps) {
-			// Constant speed phase: delay is constant
-			currentDelay = minDelay;
-			} else {
-			// Deceleration phase: delay increases
-			currentDelay = minDelay + ((i - accelSteps - constSteps) * (maxDelay - minDelay) / decelSteps);
-		}
-		delayTable[i] = currentDelay;
-	}
-}
-
-// Function to precompute the delay tables
-void precomputeDelayTables() {
-	if (delayTablesInitialized) {
-		return; // Skip if already initialized
-	}
-
-	// Initialize delay tables for 90 and 180 degree moves
-	initializeDelayTable(delayTable90, MAX_STEPS_90);
-	initializeDelayTable(delayTable180, MAX_STEPS_180);
-
-	delayTablesInitialized = 1; // Mark as initialized
-}
+int delayTable90[] = {46,19,15,12,11,10,9,9,8,8,7,7,7,7,6,6,6,6,6,6,5,5,5,5,5,5,5,5,5,5,6,6,6,6,6,6,7,7,7,7,8,8,9,9,10,11,13,15,19,46}; // Delay table for 90 degree turns
+int delayTable180[] = {46,19,15,12,11,10,9,9,8,8,7,7,7,7,6,6,6,6,6,6,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,6,6,6,6,6,6,7,7,7,7,8,8,9,9,10,11,13,15,19,46};
 
 // Function to home the motor
 int homeMotor(void) {
@@ -178,7 +27,6 @@ int homeMotor(void) {
 			return(stepIdx);
 			} else {
 			// Move one step
-			PORTL = 0b11000000;
 			stepIdx = (stepIdx + 1) % 4; // Cycle through steps
 			PORTA = motorSteps[stepIdx];
 			mTimer(20); // Delay for motor movement

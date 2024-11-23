@@ -21,13 +21,17 @@ int main(void)
 	DDRA = 0xFF;//Stepper Output
 	DDRL = 0xFF;//debug lights
 	
-	precomputeDelayTables();
-	
 	stepNum = homeMotor();
 	PORTA = motorSteps[stepNum];
 	
 	while(1){
+		moveStepper(50,&stepNum);
+		mTimer(1000);
 		moveStepper(100,&stepNum);
+		mTimer(1000);
+		moveStepper(-50,&stepNum);
+		mTimer(1000);
+		moveStepper(-100,&stepNum);
 		mTimer(1000);
 	}
 }

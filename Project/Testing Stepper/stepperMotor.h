@@ -4,10 +4,6 @@
 
 const char motorSteps[4];
 
-void initializeDelayTable(int *delayTable, int maxSteps);
-
-void precomputeDelayTables();
-
 int homeMotor(void);  //exactly what is i main
 
 void moveStepper(int moveNum,int* stepNumInput);
