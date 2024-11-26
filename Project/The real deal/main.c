@@ -7,7 +7,7 @@
 #include "stepperMotor.h"
 #include "LinkedQueue.h"
 
-// define the global variables that can be used in every function ===========
+// define the global variables that can be used in every function ==========
 volatile uint16_t ADC_result = 1023;
 volatile uint16_t ADC_result_flag = 1;
 volatile uint16_t ADCLowCount = 0;
@@ -261,8 +261,9 @@ ISR(ADC_vect)
 	if((ADC_result < ADC_result_last)){//gets us the lowest value read by the reflectivity sensor
 		} else {
 		ADC_result = ADC_result_last;
-		if (++ADCLowCount >= 10);
-		STATE = 4;//enter enqueue stage
+		if (++ADCLowCount >= 10){
+			STATE = 4;//enter enqueue stage
+		}
 	}
 	ADC_result_flag = 1;
 }
