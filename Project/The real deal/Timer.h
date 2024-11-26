@@ -7,5 +7,6 @@
 /* Subroutine headers */
 void timer8MHz();
 void mTimer(int count);
+void uTimer(unsigned int count);
 
 #endif /* TIMER_H */

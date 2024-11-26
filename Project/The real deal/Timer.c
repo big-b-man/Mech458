@@ -50,3 +50,25 @@ void mTimer(int count){
         } /* end if */
     } /* end while */
 } /* mTimer */
+
+void uTimer(unsigned int count){
+    /* The system clock is 8 MHz. You can actually see the crystal oscillator (16MHz) which is a silver looking can on the board.
+    You can use a pre-scaler on system clock to lower the speed. The Timer runs on the CPU Clock which is a function of
+    the system clock. You can also use a pre-scaler on the Timer, by 1, 8, 64, 256, or 1024 to lower the speed.
+    The system clock has been pre-scaled by 2. This means it's running at half speed, 8MHz. See Technical manual for
+    ATmega2560 (i.e. full manual) and look up "16-bit Timer/Counter1." */
+
+    /* Set the Waveform Generation mode bit description to Clear Timer on Compare Match mode (CTC) only */
+    TCCR1B |= _BV(WGM12); /* set WGM bits to 0100, see page 145 */
+    /* Note WGM is spread over two registers. */
+
+    OCR1A = count; /* Set Output Compare Register equal to the count variable. Since this is a 16 bit timer it should be able to hold all possible values of count
+    TCNT1 = 0x0000; /* Sets initial value of Timer Counter to 0x0000 */
+
+    TIFR1 |= _BV(OCF1A); /* clear the timer interrupt flag and begin new timing */
+    /* If the following statement is confusing, please ask for clarification! */
+
+    /* Poll the timer to determine when the timer has reached 0x0001 */
+    while((TIFR1 & 0x02) != 0x02){}
+	TIFR1 |= _BV(OCF1A); /* clear interrupt flag by writing a ONE to the bit */
+} /* uTimer */

@@ -47,6 +47,7 @@ Discarded input sections
  .text          0x00000000        0x0 Timer.o
  .data          0x00000000        0x0 Timer.o
  .bss           0x00000000        0x0 Timer.o
+ .text.uTimer   0x00000000       0x40 Timer.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_divmodhi4.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_divmodhi4.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_divmodhi4.o)
@@ -475,9 +476,9 @@ END GROUP
                 0x00800202                __malloc_heap_start
                 0x00800204                __malloc_margin
  *(.data*)
- .data.backSteps.1925
+ .data.backSteps.1927
                 0x00800206        0x8 stepperMotor.o
- .data.forSteps.1924
+ .data.forSteps.1926
                 0x0080020e        0x8 stepperMotor.o
  .data.delayTable180
                 0x00800216       0xc8 stepperMotor.o
@@ -611,7 +612,7 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x168
+.debug_aranges  0x00000000      0x170
  *(.debug_aranges)
  .debug_aranges
                 0x00000000       0x28 stepperMotor.o
@@ -624,12 +625,12 @@ END GROUP
  .debug_aranges
                 0x00000118       0x28 pwm.o
  .debug_aranges
-                0x00000140       0x28 Timer.o
+                0x00000140       0x30 Timer.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x21f6
+.debug_info     0x00000000     0x222d
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0xbbc C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.4.346/gcc/dev/atmega2560/avr6/crtatmega2560.o
  .debug_info    0x00000bbc      0x222 stepperMotor.o
@@ -637,9 +638,9 @@ END GROUP
  .debug_info    0x0000147c      0x304 LinkedQueue.o
  .debug_info    0x00001780      0x910 main.o
  .debug_info    0x00002090       0xa6 pwm.o
- .debug_info    0x00002136       0xc0 Timer.o
+ .debug_info    0x00002136       0xf7 Timer.o
 
-.debug_abbrev   0x00000000     0x12a7
+.debug_abbrev   0x00000000     0x12c1
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0xb1a C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.4.346/gcc/dev/atmega2560/avr6/crtatmega2560.o
  .debug_abbrev  0x00000b1a      0x126 stepperMotor.o
@@ -647,9 +648,9 @@ END GROUP
  .debug_abbrev  0x00000e29      0x15a LinkedQueue.o
  .debug_abbrev  0x00000f83      0x229 main.o
  .debug_abbrev  0x000011ac       0x76 pwm.o
- .debug_abbrev  0x00001222       0x85 Timer.o
+ .debug_abbrev  0x00001222       0x9f Timer.o
 
-.debug_line     0x00000000     0x1003
+.debug_line     0x00000000     0x1055
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x1fa C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.4.346/gcc/dev/atmega2560/avr6/crtatmega2560.o
  .debug_line    0x000001fa      0x194 stepperMotor.o
@@ -657,18 +658,18 @@ END GROUP
  .debug_line    0x00000779      0x1f4 LinkedQueue.o
  .debug_line    0x0000096d      0x4c0 main.o
  .debug_line    0x00000e2d       0xd8 pwm.o
- .debug_line    0x00000f05       0xfe Timer.o
+ .debug_line    0x00000f05      0x150 Timer.o
 
-.debug_frame    0x00000000      0x400
+.debug_frame    0x00000000      0x410
  *(.debug_frame)
  .debug_frame   0x00000000       0x88 stepperMotor.o
  .debug_frame   0x00000088       0xac LCD.o
  .debug_frame   0x00000134       0xb4 LinkedQueue.o
  .debug_frame   0x000001e8      0x1b0 main.o
  .debug_frame   0x00000398       0x34 pwm.o
- .debug_frame   0x000003cc       0x34 Timer.o
+ .debug_frame   0x000003cc       0x44 Timer.o
 
-.debug_str      0x00000000      0x8d6
+.debug_str      0x00000000      0x8dd
  *(.debug_str)
  .debug_str     0x00000000      0x3e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.4.346/gcc/dev/atmega2560/avr6/crtatmega2560.o
  .debug_str     0x000003e6      0x1c0 stepperMotor.o
@@ -681,16 +682,16 @@ END GROUP
                                 0x367 (size before relaxing)
  .debug_str     0x000008b2       0x11 pwm.o
                                 0x187 (size before relaxing)
- .debug_str     0x000008c3       0x13 Timer.o
-                                0x19c (size before relaxing)
+ .debug_str     0x000008c3       0x1a Timer.o
+                                0x190 (size before relaxing)
 
-.debug_loc      0x00000000     0x10ac
+.debug_loc      0x00000000     0x10f8
  *(.debug_loc)
  .debug_loc     0x00000000      0x1ee stepperMotor.o
  .debug_loc     0x000001ee      0x7f3 LCD.o
  .debug_loc     0x000009e1      0x278 LinkedQueue.o
  .debug_loc     0x00000c59      0x407 main.o
- .debug_loc     0x00001060       0x4c Timer.o
+ .debug_loc     0x00001060       0x98 Timer.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -710,14 +711,14 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0x120
+.debug_ranges   0x00000000      0x128
  *(.debug_ranges)
  .debug_ranges  0x00000000       0x18 stepperMotor.o
  .debug_ranges  0x00000018       0x38 LCD.o
  .debug_ranges  0x00000050       0x48 LinkedQueue.o
  .debug_ranges  0x00000098       0x58 main.o
  .debug_ranges  0x000000f0       0x18 pwm.o
- .debug_ranges  0x00000108       0x18 Timer.o
+ .debug_ranges  0x00000108       0x20 Timer.o
 
 .debug_macro
  *(.debug_macro)
