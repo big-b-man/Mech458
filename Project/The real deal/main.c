@@ -53,7 +53,7 @@ int main() {
 	// config the external interrupt ========================================
 	EIMSK |= (1 << INT0) | (1 << INT1) | (1 << INT2) | (1 << INT5);                                     // enable INT0-INT2 and INT5
 	EICRA |= (1 << ISC21) | (1 << ISC20) | (1 << ISC11) | (1 << ISC10) | (1 << ISC01);                  // rising edge interrupt for INT1-INT2, falling edge for INT0
-	EICRB |= (1 << ISC50) | (1 << ISC51);					                                            // rising edge for INT5
+	EICRB |= (1 << ISC50);			     					                                            // rising edge for INT5
 
 	// config ADC ===========================================================
 	// by default, the ADC input (analog input) is set to ADC0 / PORTF0
@@ -175,16 +175,16 @@ int main() {
 		PORTL = (1 << PINL5);
 		LCDClear();
 		//Highest ADC Values for white, FE and AL
-		uint16_t material_types[] = {933, /*white derlin*/
-			800, //delrin/steel boundary
+		uint16_t material_types[] = {940, /*Black derlin low limit*/
+			800, //white delrin/steel boundary
 		400 /*steel/aluminum boundary*/};
 		LCDGotoXY(12,0);
 		LCDWriteInt(ADC_result,3);
 		int material;
 		if(ADC_result > material_types[0]){
-			material = WHITE;
-			} else if (ADC_result > material_types[1]) {
 			material = BLACK;
+			} else if (ADC_result > material_types[1]) {
+			material = WHITE;
 			} else if (ADC_result > material_types[2]) {
 			material = FE;
 			} else {
@@ -248,8 +248,15 @@ ISR(INT2_vect) //Controls program pause button. Holds the program in the interru
 
 ISR(INT5_vect)// Interrupt 5, Triggered the optical sensor next to the reflectivity sensor
 {
-	mTimer(20);//de-bouncing
-	STATE = 1;
+	mTimer(3);//de-bouncing
+	if (PINE & (1 << PINE5)) {
+		//If pin is high, enter reflective stage
+		STATE = 1;
+		} else {
+		//if pin is low, enter ENQUEUE Stage
+		STATE = 4;
+		// INT5 pin is low
+	}
 }
 
 // the interrupt will be triggered if the ADC is done =======================
@@ -257,16 +264,15 @@ ISR(ADC_vect)
 {
 	uint16_t ADC_result_last = ADC_result;
 	ADC_result = ADCL;
-	ADC_result |= ADCH << 8;
+	ADC_result |= (ADCH & 0x03) << 8;
 	if((ADC_result < ADC_result_last)){//gets us the lowest value read by the reflectivity sensor
 		} else {
 		ADC_result = ADC_result_last;
-		if (++ADCLowCount >= 10){
-			STATE = 4;//enter enqueue stage
-		}
 	}
 	ADC_result_flag = 1;
 }
+
+
 
 ISR(BADISR_vect)
 {
