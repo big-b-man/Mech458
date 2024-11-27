@@ -1,11 +1,11 @@
 % Parameters
 N = 100;  % Total number of steps
 maxDelay = 15;  % Maximum delay (top speed)
-minDelay = 5;  % Minimum delay (bottom speed)
+minDelay = 6;  % Minimum delay (bottom speed)
 n = 2;  % Acceleration factor (steepness of the curve)
 m = 2;  % Deceleration factor (steepness of the curve)
 
-platSteps = [15 18 22 5]; % Plateau durations
+platSteps = [22]; % Plateau durations
 
 % Preallocate a matrix to store delay profiles
 allDelays = zeros(length(platSteps), N);
@@ -38,9 +38,9 @@ for h = 1:length(platSteps)
     allDelays(h, :) = delays;
 
     % Output the delays array for C code
-    fprintf('int delayTable90[%d');
+    fprintf('int delayTable180[] = {%d');
     fprintf('%.6g, ', delays(1:end-1)*1000);  % Print all but last element
-    fprintf('%.6g];\n', delays(end)*1000);  % Print the last element
+    fprintf('%.6g};\n', delays(end)*1000);  % Print the last element
 
     % Calculate the sum of the delay profile
     totalSums(h) = sum(delays);  % Sum of the delays

@@ -60,7 +60,7 @@ int main() {
 	ADCSRA |= (1 << ADEN);                       // enable ADC
 	ADCSRA |= (1 << ADIE);                       // enable interrupt of ADC
 	ADMUX  |= (1 << REFS0);						 //AVCC with external capacitor at AREF pin
-
+	
 	// sets the Global Enable for all interrupts ============================
 	sei();
 	
@@ -132,15 +132,18 @@ int main() {
 		if((binMovements[sorterbin][rtnLink->e.number])){
 			motorState = 0x03;//stop motor
 			PORTB = (motorState & 0x03);
-			mTimer(75);//Give item time to drop
+			//motorState = 0x03;//stop motor
+			//PORTB = (motorState & 0x03);
+			PORTL = 0x00;
 			moveStepper(binMovements[sorterbin][rtnLink->e.number],&stepNum);
 			sorterbin = rtnLink->e.number;
-			motorState = 0x02;
-			PORTB = motorState & 0x03;
+			// Reset the counter to 195 for another ~200 ms cycle
 		}
 		free(rtnLink);
 		//Reset the state variable
 		STATE = 0;
+		motorState = 0x02;
+		PORTB = motorState & 0x03;
 		goto POLLING_STAGE;
 	}
 	END:
