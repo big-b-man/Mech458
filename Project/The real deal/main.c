@@ -62,16 +62,16 @@ int main() {
 	ADMUX  |= (1 << REFS0);						 //AVCC with external capacitor at AREF pin
 	
 	//Setup Timer 3 for belt delay
-	//Prescaler to 256, page 157 for details
+	//These two registers should already be 0 but I'm doing a sanity check
 	TCCR3A = 0x00;
-	TCCR3B = 0x00;
+	TCCR3B &= ~(0xDF);
+	//Prescaler to 256, page 157 for details
 	TCCR3B |= (1 << CS32);
+	
 	//time to count to max value: 256 *(2^16-1) =16,776,960 cycles ~= 2 seconds
-	
-	//set registers on timer to 0 (Set to value if you want delay less than 2 seconds
-	TCNT3H = 0x00;
-	TCNT3L = 0x00;
-	
+	//((2^16-1)-(59285))*256/(8*10^6)=0.2s, 59285 = E795
+	TCNT3H = 0xE7;
+	TCNT3L = 0x95;
 	
 	// sets the Global Enable for all interrupts ============================
 	sei();
@@ -142,28 +142,24 @@ int main() {
 		dequeue(&head,&tail,&rtnLink);
 		//if item is in same bin don't move motor
 		if((binMovements[sorterbin][rtnLink->e.number])){
-			PORTL = 0x00;
 			motorState = 0x03;//stop motor
 			PORTB = (motorState & 0x03);
 			while (!(TIFR3 & (1 << TOV3))){
-				PORTL = 0xF0;
-				mTimer(1);
+				PORTL = (1 << PINL4) | (1 <<PINL5);
 			}
-			//motorState = 0x03;//stop motor
-			//PORTB = (motorState & 0x03);
 			PORTL = 0x00;
 			moveStepper(binMovements[sorterbin][rtnLink->e.number],&stepNum);
 			sorterbin = rtnLink->e.number;
-			// Reset the counter to 195 for another ~200 ms cycle
 		}
 		free(rtnLink);
 		//Reset the state variable
 		STATE = 0;
 		motorState = 0x02;
 		PORTB = motorState & 0x03;
-		TCNT3H = 0x00;
-		TCNT3L = 0x00;
-		TIFR3 &= ~(1 << TOV3);
+		//must match value at timer setup stage
+		TCNT3H = 0xE7;
+		TCNT3L = 0x95;
+		TIFR3 |= (1 << TOV3);
 		goto POLLING_STAGE;
 	}
 	END:
