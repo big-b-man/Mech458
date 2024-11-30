@@ -64,7 +64,7 @@ int main() {
 	//Setup Timer 3 for belt delay
 	//These two registers should already be 0 but I'm doing a sanity check
 	TCCR3A = 0x00;
-	TCCR3B &= ~(0xDF);
+	TCCR3B &= ~(0xDF);//zeroes everything except bit 5 which is read only.
 	//Prescaler to 256, page 157 for details
 	TCCR3B |= (1 << CS32);
 	
@@ -104,9 +104,6 @@ int main() {
 
 	// POLLING STATE
 	POLLING_STAGE:
-	if((rampDown == 1) && (tail == NULL)){
-		STATE = 3;
-	}
 	switch(STATE){
 		case (0) :
 		PORTL = (1 << PINL7);   //shows what stage we are in
@@ -153,7 +150,11 @@ int main() {
 		}
 		free(rtnLink);
 		//Reset the state variable
-		STATE = 0;
+		if(rampDown == 1){
+			STATE = 3;
+			} else {
+			STATE = 0;
+		};
 		motorState = 0x02;
 		PORTB = motorState & 0x03;
 		//must match value at timer setup stage
@@ -164,12 +165,18 @@ int main() {
 	}
 	END:
 	{
-		//waits 5 seconds to make sure belt is clear
-		for(int i = 0; i < 5000; i++){
-			mTimer(1);
-			if(!(tail == NULL)){
-				STATE = 0;
-				goto POLLING_STAGE;
+		PORTL = (1 << PINL7) | (1 << PINL5);
+		for(int i = 0; i < 5; i++){
+			TCNT3H = 0x80;
+			TCNT3L = 0x00;
+			TIFR3 |= (1 << TOV3);
+			while(!(TIFR3 & (1 << TOV3))){
+				if(STATE != 3){
+					TCNT3H = 0xE7;
+					TCNT3L = 0x95;
+					TIFR3 |= (1 << TOV3);
+					goto POLLING_STAGE;
+				}
 			}
 		}
 		LCDGotoXY(0,0);
@@ -229,7 +236,7 @@ int main() {
 	}
 } // end main
 
-// sensor switch: Active HIGH starts AD conversion ==========================
+// Optical sensor to enter bucket stage
 ISR(INT0_vect)
 {
 	STATE = 2;
@@ -240,6 +247,7 @@ ISR(INT1_vect){
 	while(PIND & (1 << PIND1)){};//wait for button to be released
 	mTimer(20);
 	rampDown = 1;
+	STATE = 3;
 	EIFR |= (1 << INTF1);//for some reason the interrupt automatically re triggers unless I explicitly clear the flag at the end.
 }
 
