@@ -21,6 +21,7 @@ const int binMovements [4][4] =	{{0,50,100,-50},
 {-50,0,50,100},
 {100,-50,0,50},
 {50,100,-50,0}};
+volatile uint16_t unsorted_items = 0;
 
 enum material{
 	BLACK = 0,
@@ -69,9 +70,9 @@ int main() {
 	TCCR3B |= (1 << CS32);
 	
 	//time to count to max value: 256 *(2^16-1) =16,776,960 cycles ~= 2 seconds
-	//((2^16-1)-(59285))*256/(8*10^6)=0.2s, 59285 = E795
-	TCNT3H = 0xE7;
-	TCNT3L = 0x95;
+	//((2^16-1)-(56000))*256/(8*10^6) =~ 0.23, 56000 = D098
+	TCNT3H = 0xD0;
+	TCNT3L = 0x98;
 	
 	// sets the Global Enable for all interrupts ============================
 	sei();
@@ -97,6 +98,19 @@ int main() {
 	//pwm setup to 40% duty cycle
 	pwm();
 	pwmSet(127);
+	/*
+	while(1){
+	moveStepper(50,&stepNum);
+	mTimer(200);
+	moveStepper(100,&stepNum);
+	mTimer(200);
+	moveStepper(-50,&stepNum);
+	mTimer(200);
+	moveStepper(-100,&stepNum);
+	mTimer(200);
+	
+	}
+	*/
 	motorState = 0x02;
 	PORTB |= motorState;
 
@@ -148,6 +162,21 @@ int main() {
 			moveStepper(binMovements[sorterbin][rtnLink->e.number],&stepNum);
 			sorterbin = rtnLink->e.number;
 		}
+		sorted_items[rtnLink->e.number]++;
+		unsorted_items--;
+		LCDClear();
+		LCDGotoXY(0,0);
+		LCDWriteString("BL AL WI FE UN");
+		LCDGotoXY(0,1);
+		LCDWriteInt(sorted_items[0],2);
+		LCDGotoXY(3,1);
+		LCDWriteInt(sorted_items[1],2);
+		LCDGotoXY(6,1);
+		LCDWriteInt(sorted_items[2],2);
+		LCDGotoXY(9,1);
+		LCDWriteInt(sorted_items[3],2);
+		LCDGotoXY(12,1);
+		LCDWriteInt(unsorted_items,2);
 		free(rtnLink);
 		//Reset the state variable
 		if(rampDown == 1){
@@ -158,8 +187,8 @@ int main() {
 		motorState = 0x02;
 		PORTB = motorState & 0x03;
 		//must match value at timer setup stage
-		TCNT3H = 0xE7;
-		TCNT3L = 0x95;
+		TCNT3H = 0xD0;
+		TCNT3L = 0x98;
 		TIFR3 |= (1 << TOV3);
 		goto POLLING_STAGE;
 	}
@@ -179,16 +208,6 @@ int main() {
 				}
 			}
 		}
-		LCDGotoXY(0,0);
-		LCDWriteString("BL AL WI FE");
-		LCDGotoXY(0,1);
-		LCDWriteInt(sorted_items[0],2);
-		LCDGotoXY(3,1);
-		LCDWriteInt(sorted_items[1],2);
-		LCDGotoXY(6,1);
-		LCDWriteInt(sorted_items[2],2);
-		LCDGotoXY(9,1);
-		LCDWriteInt(sorted_items[3],2);
 		motorState = 0x03;
 		PORTB = (motorState & 0x03);
 		while(1){
@@ -198,12 +217,13 @@ int main() {
 	
 	ENQUEUE:
 	{
+		unsorted_items++;
 		PORTL = (1 << PINL5);
 		LCDClear();
 		//Highest ADC Values for white, FE and AL
-		uint16_t material_types[] = {940, /*Black derlin low limit*/
+		uint16_t material_types[] = {920, /*Black derlin low limit*/
 			800, //white delrin/steel boundary
-		400 /*steel/aluminum boundary*/};
+		150 /*steel/aluminum boundary*/};
 		LCDGotoXY(12,0);
 		LCDWriteInt(ADC_result,3);
 		int material;
@@ -216,7 +236,6 @@ int main() {
 			} else {
 			material = AL;
 		}
-		sorted_items[material]++;
 		initLink(&newLink); //creates new link and stores input to linked lsit.
 		newLink->e.number = material;
 		enqueue(&head, &tail, &newLink);
@@ -254,7 +273,18 @@ ISR(INT1_vect){
 ISR(INT2_vect) //Controls program pause button. Holds the program in the interrupt until pause it pressed again.
 {
 	LCDClear();
-	LCDWriteString("Program Paused");
+	LCDGotoXY(0,0);
+	LCDWriteString("BL AL WI FE UN");
+	LCDGotoXY(0,1);
+	LCDWriteInt(sorted_items[0],2);
+	LCDGotoXY(3,1);
+	LCDWriteInt(sorted_items[1],2);
+	LCDGotoXY(6,1);
+	LCDWriteInt(sorted_items[2],2);
+	LCDGotoXY(9,1);
+	LCDWriteInt(sorted_items[3],2);
+	LCDGotoXY(12,1);
+	LCDWriteInt(unsorted_items,2);
 	motorState = 0x03;//stop motor
 	PORTB = (motorState & 0x03);
 	while(PIND & (1 << PIND2)){};//wait for button to be released
